@@ -11,6 +11,10 @@ const GlobalStyles = injectGlobal`
 
     @import url('https://fonts.googleapis.com/css?family=Ubuntu+Condensed');
 
+    html {
+        min-height: 100%;
+    }
+
     body {
         color: ${MainTextColor};
         background: ${GrayColor};
@@ -25,7 +29,7 @@ const GlobalStyles = injectGlobal`
     h4,
     h5 {
         font-family: "Ubuntu Condensed", sans-serif;
-        margin-bottom: 20px;
+        
     }
 
     p {
@@ -33,12 +37,16 @@ const GlobalStyles = injectGlobal`
     }
 
     h1, h3, h4 {
-        color: 	;
+        color: 	${PrimaryColor};
+        font-weight: 200;
+        text-transform: uppercase;
     } 
 
     h1 {
         font-size: 36px;
-        line-height: 40px;
+        line-height: 2rem;
+        margin-top: 0.5rem;
+        margin-bottom: 0.5rem;
     }
 
     h3 {
@@ -49,14 +57,13 @@ const GlobalStyles = injectGlobal`
         font-size: 18px;
         color: ${PrimaryLightColor};
         font-weight: normal;
-        text-transform: uppercase;
     }
 
     a,
     Link {
         color: ${PrimaryColor};
         text-decoration: none;
-        transition: 0.5s ease;
+        transition: 0.3s ease;
     }
 
     a:hover,
