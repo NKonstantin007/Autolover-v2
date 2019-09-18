@@ -14,7 +14,9 @@ const GlobalStyles = injectGlobal`
     body {
         color: ${MainTextColor};
         background: ${GrayColor};
-        font: 300 16px/22px 'Ubuntu Condensed' Georgia, Arial, sans-serif;
+        font-size: 14px;
+        line-height: 22px;
+        font-family: 'Ubuntu Condensed', Georgia, Arial, sans-serif;
         margin: 0;
     }
 
