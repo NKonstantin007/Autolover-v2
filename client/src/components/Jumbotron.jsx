@@ -13,7 +13,7 @@ const Jumbotron = () => {
         <StyledJumbotron>
             <JumbotronTitle>Посвящается автомобильной отрасли</JumbotronTitle>
             <JumbotronText>Как и многие популярные автомобильные сайты, мы рады предоставить целый комплекс сервисов и информационно аналитических материалов для опытных водителей, новичков и тех, кто только планирует сесть за руль</JumbotronText>
-            <JumbotronSignUpLink>Зарегистрируйтесь сейчас</JumbotronSignUpLink>
+            <JumbotronSignUpLink to="/">Зарегистрируйтесь сейчас</JumbotronSignUpLink>
         </StyledJumbotron>
     );
 }
