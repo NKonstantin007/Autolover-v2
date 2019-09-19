@@ -5,7 +5,6 @@ import {
     JumbotronTitle,
     JumbotronText,
     JumbotronSignUpLink
-
 } from './styles/Jumbotron';
 
 const Jumbotron = () => {

@@ -5,7 +5,7 @@ import {
     GrayColor,
     AccentColor,
     PrimaryColor
-} from '../../styles/colors';
+} from '../../../../styles/colors';
 
 export const StyledJumbotron = styled.div`
     text-align: center;
