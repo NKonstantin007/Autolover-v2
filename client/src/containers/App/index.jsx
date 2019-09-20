@@ -8,6 +8,7 @@ import AutoHeader from '../../components/AutoHeader';
 import Slider from '../../components/Slider';
 import AutoFooter from '../../components/AutoFooter';
 
+import 'bootstrap/dist/css/bootstrap.min.css';
 import './styles/GlobalStyles';
 
 const AppContainer = () => {
