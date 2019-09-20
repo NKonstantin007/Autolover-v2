@@ -6,6 +6,7 @@ import store from './redux/store';
 import Routes from './components/Routes';
 import AutoHeader from '../../components/AutoHeader';
 import Slider from '../../components/Slider';
+import AutoFooter from '../../components/AutoFooter';
 
 import './styles/GlobalStyles';
 
@@ -17,6 +18,7 @@ const AppContainer = () => {
                     <AutoHeader />
                     <Slider />
                     <Routes />
+                    <AutoFooter />
                 </BrowserRouter>
             </Provider>
         </div>
