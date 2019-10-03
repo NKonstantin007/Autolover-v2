@@ -1,12 +1,12 @@
-import { createStore } from 'redux';
+import { createStore, combineReducers } from 'redux';
 import {applyMiddleware} from 'redux';
 import thunk from 'redux-thunk';
-import reducer from './reducers';
+import rootReducer from './reducers';
 
 const initialState = {};
 
 const store = createStore(
-    reducer,
+    combineReducers(rootReducer),
     initialState,
     applyMiddleware(thunk)
     );

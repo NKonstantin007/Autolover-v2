@@ -1,6 +1,5 @@
+import {reducer as reduxFormReducer} from 'redux-form';
 
-const reducer = (state, action) => {
-    return state;
-}
-
-export default reducer;
+export default {
+    form: reduxFormReducer
+};
