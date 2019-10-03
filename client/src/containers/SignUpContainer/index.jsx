@@ -1,12 +1,14 @@
 import React from 'react';
 import { Container, Row, Col } from 'reactstrap';
 
+import SignUpAnnouncement from './components/SignUpAnnouncement';
+
 const SignUpContainer = () => {
     return (
         <Container>
             <Row>
                 <Col md="8" sm="6" xs="12">
-                    SignUpAnnouncement
+                    <SignUpAnnouncement />
                 </Col>
                 <Col md="4" sm="6" xs="12">
                     SignUpForm
