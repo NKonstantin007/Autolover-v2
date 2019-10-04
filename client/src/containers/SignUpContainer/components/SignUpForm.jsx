@@ -6,10 +6,11 @@ import Input from '../../../components/formElements/Input'
 import Label from '../../../components/formElements/styles/Label';
 import Button from '../../../styles/components/Button';
 
-const SignUpForm = () => {
+const SignUpForm = (props) => {
+    const {handleSubmit} = props;
     return (
         <SignUpFormWrapper>
-            <StyledSignUpForm>
+            <StyledSignUpForm onSubmit={handleSubmit}>
                 <div>
                     <Label>Имя</Label>
                     <Field name="name" type="text" component={Input} />
