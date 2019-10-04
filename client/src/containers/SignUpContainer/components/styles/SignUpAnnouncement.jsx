@@ -10,3 +10,8 @@ export const AnnouncementList = styled.ul`
     margin-bottom: 20px;
 `;
 
+export const AnnouncementTitle = styled.h3`
+    text-align: center;
+    padding-bottom: 2rem;
+`;
+

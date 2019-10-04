@@ -3,12 +3,13 @@ import {Alert, Badge} from 'reactstrap';
 
 import {
     SignUpAnnouncementWrapper, 
-    AnnouncementList
+	AnnouncementList,
+	AnnouncementTitle
 } from './styles/SignUpAnnouncement';
 const SignUpAnnouncement = () => {
     return (
         <SignUpAnnouncementWrapper>
-            <h3>Регистрация</h3>
+            <AnnouncementTitle>Регистрация</AnnouncementTitle>
 				<p>Зарегистрируйтесь на АвтоЛюбитель, используя форму справа. Это не займет много времнени. После регистрации не стесняйтесь приглащать друзей и знакомых посетить наш сайт. Им тоже понравится.</p>
 				<Alert color="success">
 					<b>Внимание!</b> При вводе логина и пароля допустимо использовать только символы латинского алфавита <Badge color="success">a-z</Badge> и цифры <Badge color="success">0-9</Badge>

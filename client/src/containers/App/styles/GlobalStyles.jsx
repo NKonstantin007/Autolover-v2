@@ -20,7 +20,7 @@ const GlobalStyles = injectGlobal`
         background: ${GrayColor};
         font-size: 14px;
         line-height: 22px;
-        font-family: 'Ubuntu Condensed', Georgia, Arial, sans-serif;
+        font-family: 'Ubuntu Condensed', Georgia, Arial, Barlow, sans-serif;
         margin: 0;
     }
 

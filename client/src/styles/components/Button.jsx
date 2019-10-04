@@ -4,21 +4,55 @@ import {
     AccentColor,
     GrayColor,
     PrimaryColor,
-    PurpleColor
+    PrimaryLightColor,
+    PurpleColor,
+    MainTextColor
 } from '../colors';
 
 const Button = styled.button`
     padding: 8px 10px;
-    background: radial-gradient(${PurpleColor}	, ${AccentColor});
-    border: 2px solid ${PrimaryColor};
-    border-radius: 20px;
+    background: ${(props) => {
+        if(props.color === 'primary') return `radial-gradient(${PrimaryLightColor}, ${PrimaryColor})`;
+        if(props.color === 'accent') return `radial-gradient(${PurpleColor}, ${AccentColor})`;
+
+        return `radial-gradient(${PurpleColor}, ${AccentColor})`;
+    }};
+    border-width: ${(props) => {
+        if(props.color === 'accent') return '2px';
+
+        return '0px';
+    }};
+    border-style: solid;
+    border-color: ${(props) => {
+        if(props.color === 'primary') return 'transparent';
+        if(props.color === 'accent') return PrimaryColor;
+
+        return PrimaryColor;
+    }};
+    border-radius: ${(props) => {
+        if(props.round) return '20px';
+
+        return '5px';
+    }};;
     color: ${GrayColor};
-    transition: 0.3s ease;
+    transition: color 0.3s ease;
     text-transform: uppercase;
     font-weight: bold;
+    font-size: 14px;
 
     &:hover {
-        background:  ${AccentColor};
+        background: ${(props) => {
+            if(props.color === 'accent') return AccentColor;
+            if(props.color === 'primary') return PrimaryColor;
+    
+            return PrimaryColor;
+        }};
+        color: ${(props) => {
+            if(props.color === 'accent') return PrimaryLightColor;
+            if(props.color === 'primary') return MainTextColor;
+    
+            return PrimaryColor;
+        }};
         border: none;
         cursor: pointer;
     }

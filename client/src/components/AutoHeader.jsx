@@ -28,8 +28,8 @@ const AutoHeader = () => {
             <StyledMenuHeader>
                 <FlexBlock direction="column" justify="space-between">
                     <StyledSignInUpButtons>
-                        <Button>Войти</Button>
-                        <Button>Регистрация</Button>
+                        <Button color="accent" round>Войти</Button>
+                        <Button color="accent" round>Регистрация</Button>
                     </StyledSignInUpButtons>
                     <StyledNavHeader>
                         <Link to="/">Главная</Link>

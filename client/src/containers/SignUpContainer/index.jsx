@@ -2,6 +2,7 @@ import React from 'react';
 import { Container, Row, Col } from 'reactstrap';
 
 import SignUpAnnouncement from './components/SignUpAnnouncement';
+import SignUpForm from './components/SignUpForm';
 
 const SignUpContainer = () => {
     return (
@@ -11,7 +12,7 @@ const SignUpContainer = () => {
                     <SignUpAnnouncement />
                 </Col>
                 <Col md="4" sm="6" xs="12">
-                    SignUpForm
+                    <SignUpForm />
                 </Col>
             </Row>
         </Container>
