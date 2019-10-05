@@ -9,7 +9,6 @@ export const fetchSignUp = (user) => async(dispatch) => {
     try {
         dispatch(fetchSignUpRequest());
         const response = await authApi.signUp(user);
-        console.log(response);
         dispatch(fetchSignUpSuccess());
     }
     catch(e) {

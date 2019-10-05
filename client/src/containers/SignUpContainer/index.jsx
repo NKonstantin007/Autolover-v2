@@ -9,9 +9,6 @@ import {fetchSignUp} from './redux/actions';
 
 const SignUpContainer = (props) => {
 
-    const {error, isFetching} = props;
-
-
     const onSignUp = async (user) => {
         try {
             await props.fetchSignUp(user);
@@ -23,12 +20,6 @@ const SignUpContainer = (props) => {
 
     return (
         <React.Fragment>
-            {
-                error && (<div>Error: {error}</div>)
-            }
-            {
-                isFetching && (<div>Loading...</div>)
-            }
             <Container>
                 <Row>
                     <Col md="8" sm="6" xs="12">
@@ -43,17 +34,9 @@ const SignUpContainer = (props) => {
     );
 }
 
-const mapStateToProps = ({ signUp }) => {
-    const {isFetching, error} = signUp
-    return {
-        isFetching,
-        error
-    };
-};
-
 const mapDispatchToProps = {
     fetchSignUp
 }
 
 
-export default connect(mapStateToProps, mapDispatchToProps)(SignUpContainer);
+export default connect(null, mapDispatchToProps)(SignUpContainer);
