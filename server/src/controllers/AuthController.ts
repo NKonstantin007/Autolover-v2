@@ -12,7 +12,7 @@ class AuthController extends BaseController {
     private async signUp(req: Request, res: Response, next: NextFunction): Promise<Response | void> {
         try{
             const user = await AuthService.signUp(req.body);
-            return res.json({user}).status(201);
+            return res.status(201).json(user);
         }
         catch(err) {
             console.log(err);
