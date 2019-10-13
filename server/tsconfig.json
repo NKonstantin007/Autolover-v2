@@ -1,12 +1,14 @@
 {
     "compilerOptions": {
         "module": "commonjs",
-        "target": "ES6",
+        "target": "es2017",
         "noImplicitAny": false,
         "removeComments": true,
         "outDir": "bin/",
         "sourceMap": false,
-        "esModuleInterop": true
+        "esModuleInterop": true,
+        "experimentalDecorators": true,
+        "emitDecoratorMetadata": true
     },
     "include": [
         "./src/**/*"

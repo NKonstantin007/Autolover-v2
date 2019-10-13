@@ -1,9 +1,14 @@
 import express from 'express';
 import {Express} from "express";
 import bodyParser from 'body-parser';
+import mongoose from 'mongoose';
 
 import config from './config';
+import AppController from './controllers/AppController';
 
+/**
+ * Main class of application
+ */
 export default class App {
     /**
      * App instanse
@@ -13,6 +18,9 @@ export default class App {
      * Express instance
      */ 
     private expApp: Express;
+
+
+    private appController: AppController;
 
     /**
      * Return App instance
@@ -30,21 +38,26 @@ export default class App {
      */
     constructor() {
         this.expApp = express();
+        this.appController = new AppController();
     }
 
     /**
      * Initialize and run an application
      */
-    public run(): void {
+    public async run(): Promise<void> {
         // oportinity to get body of request as json type
         this.expApp.use(bodyParser.urlencoded({extended: false}));
         this.expApp.use(bodyParser.json());
 
         // API routing
-        // ------------
-        this.expApp.use(`${config.apiPrefix}/test`, (req, res) => {
-            console.log("test api");
-            res.json({api: "test"});
+        this.appController.init();
+        this.expApp.use(`${config.apiPrefix}`, this.appController.getRouter());
+
+        // connect database
+        await mongoose.connect(config.databaseURL, {
+            useNewUrlParser: true,
+            useFindAndModify: false,
+            useUnifiedTopology: true
         });
 
         // start server
