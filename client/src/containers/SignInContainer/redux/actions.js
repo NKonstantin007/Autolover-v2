@@ -8,9 +8,9 @@ export const fetchSignInFailure = createAction('FETCH_SIGN_IN_FAILURE');
 export const fetchSignIn = (user, history) => async (dispatch) => {
     try {
         dispatch(fetchSignInRequest());
-        const response = await authApi.signIn(user);
-        console.log(response);
-        dispatch(fetchSignInSuccess(response.data));
+        const {data} = await authApi.signIn(user);
+        localStorage.setItem('autoloverToken', data.token);
+        dispatch(fetchSignInSuccess(data.user));
         history.push('/');
     }
     catch(err) {
