@@ -9,6 +9,7 @@ export const fetchSignIn = (user, history) => async (dispatch) => {
     try {
         dispatch(fetchSignInRequest());
         const response = await authApi.signIn(user);
+        console.log(response);
         dispatch(fetchSignInSuccess(response.data));
         history.push('/');
     }
