@@ -2,18 +2,37 @@ import styled from '@emotion/styled';
 import {
   MainTextColor,
   GrayDarkColor,
+  ErrorColor,
+  PrimaryLightColor
 } from '../../../styles/colors';
 
-const StyledInput = styled.input`
+const StyledInput = styled.div`
+  margin-bottom: 1rem;
+  width: 100%;
+
+  & input {
     border-width: 0;
-    border-bottom: 1px solid ${GrayDarkColor};
+    border-bottom-color:${(props => {
+      if(props.touched && props.error) return ErrorColor;
+      if(props.touched && !props.error) return PrimaryLightColor;
+      return GrayDarkColor;
+    })};
+    border-bottom-width: ${(props) => {
+      if(props.touched) return '2px';
+      return '1px';
+    }};
     background: transparent;
     padding: 0.5rem 0.5rem 0 0.5rem;
-    margin-bottom: 1rem;
+    margin-bottom: 0.5rem;
     font-size: 12px;
     width: 100%;
     color:  ${MainTextColor};
     font-family: Barlow;
+  }
+
+  & span {
+    color: ${ErrorColor}
+  }
 `;
 
 export default StyledInput;

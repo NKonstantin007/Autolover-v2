@@ -10,6 +10,76 @@ import Input from '../../../components/formElements/Input'
 import Label from '../../../components/formElements/styles/Label';
 import Button from '../../../styles/components/Button';
 
+const validate = (values) => {
+    const charactersPattern = /[^0-9a-z_-]/i;   // RegExp to validate the input of valid characters
+    const emailPattern = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i // RegExp to validate email
+    const errors = {}
+    //--- Name check ---
+    // check name for emptiness
+    if (!values.name) {
+        errors.name = 'Введите имя';
+    }
+    // check name for emptiness with space
+    else if (values.name.trim() === '') {
+        errors.name = 'Введите имя';
+    }
+    // check name max length 
+    else if (values.name.length > 20) {
+    errors.name = 'Длина имени должна быть не более 20 символов';
+    }
+    // check name for compliance with the pattern
+    else if(charactersPattern.test(values.name.trim())) {
+        errors.name='Имя содержит недопустимые символы';
+    }
+
+    //--- Email check ---
+    // check email for emptiness
+    if (!values.email) {
+        errors.email = 'Введите email';
+    }
+    // check email for emptiness with space
+    else if (values.email.trim() === '') {
+        errors.name = 'Введите email';
+    }
+    // check email for compliance with the pattern
+    else if (!emailPattern.test(values.email.trim())) {
+        errors.email = 'Email не соответствует шаблону';
+    }
+
+    //--- Password check ---
+    // check password for emptiness
+    if (!values.password) {
+        errors.password = 'Введите пароль';
+    }
+    // check password for emptiness with space
+     else if (values.password.trim() === '') {
+        errors.name = 'Введите пароль';
+    }
+    // check password min length 
+    else if (values.password.length < 6) {
+        errors.password = 'Длинна пароля должна быть не меньше 6 символов';
+    }
+    // check password for compliance with the pattern
+    else if(!charactersPattern.test(values.password.trim())) {
+        errors.name='Пароль содержит недопустимые символы';
+    }
+
+    //--- Second password check ---
+    // check second password for emptiness
+    if (!values.secondPassword) {
+        errors.secondPassword = 'Введите повторный пароль';
+    }
+     // check second password for emptiness with space
+     else if (values.secondPassword.trim() === '') {
+        errors.name = 'Введите повторный пароль';
+    }
+    // check password for equal with second password 
+    else if (values.password && (values.password.trim() !== values.secondPassword.trim())) {
+        errors.secondPassword = 'Пароли не совпадают';
+    }
+    return errors
+  }
+
 const SignUpForm = (props) => {
     const {handleSubmit, userName, error} = props;
     return (
@@ -20,7 +90,7 @@ const SignUpForm = (props) => {
                     Перейдите по <Link to='/signin'>сcылке</Link> для авторизации
                 </Alert>
             }
-            <StyledSignUpForm onSubmit={handleSubmit}>
+            <StyledSignUpForm noValidate onSubmit={handleSubmit}>
                 <div>
                     <Label>Имя</Label>
                     <Field name="name" type="text" component={Input} />
@@ -56,5 +126,8 @@ const mapStateToProps = ({signUp}) => {
 
 export default compose(
     connect(mapStateToProps),
-    reduxForm({ form: 'SignUpForm'}),
+    reduxForm({ 
+        form: 'SignUpForm',
+        validate
+    }),
 )(SignUpForm);
