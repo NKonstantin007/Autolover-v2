@@ -1,6 +1,7 @@
 import BaseController from './BaseController';
 import IPathRoute from '../interfaces/IPathRoute';
 import AuthController from './AuthController';
+import isAuth from '../middlewares/isAuth';
 
 class AppController extends BaseController {
     private routeList: IPathRoute[] = [
@@ -8,7 +9,7 @@ class AppController extends BaseController {
     ];
     
     public init() {
-        this.router.use('/test', (req, res) => {
+        this.router.get('/test', isAuth, (req, res) => {
             res.json({api: "test"});
         });
 
