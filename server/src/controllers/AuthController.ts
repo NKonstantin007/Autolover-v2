@@ -1,11 +1,18 @@
 import {Request, Response, NextFunction} from 'express';
+
 import BaseController from './BaseController';
 import AuthService from '../services/AuthService';
+import validate from '../middlewares/validate';
+import { SignUpValidators } from '../validations/AuthValidators';
 
 class AuthController extends BaseController {
 
     public init() {
-        this.router.post('/signup', this.signUp);
+        this.router.post(
+            '/signup',
+            validate(SignUpValidators),
+            this.signUp
+        );
         this.router.post('/signin', this.signIn);
     }
 
@@ -23,8 +30,7 @@ class AuthController extends BaseController {
     private async signIn(req: Request, res: Response, next: NextFunction): Promise<Response | void> {
         try{
             const {user, token} = await AuthService.signIn(req.body);
-            console.log("sign in ", req.body);
-            return res.status(200).json({user, token});
+            return res.status(200).json({user, token, msg: 'Success'});
         }
         catch(err) {
             console.log(err);

@@ -45,7 +45,7 @@ export default class App {
      * Initialize and run an application
      */
     public async run(): Promise<void> {
-        // oportinity to get body of request as json type
+        // oportunity to get body of request as json type
         this.expApp.use(bodyParser.urlencoded({extended: false}));
         this.expApp.use(bodyParser.json());
 
