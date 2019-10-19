@@ -53,15 +53,15 @@ const validate = (values) => {
     }
     // check password for emptiness with space
      else if (values.password.trim() === '') {
-        errors.name = 'Введите пароль';
+        errors.password = 'Введите пароль';
     }
     // check password min length 
     else if (values.password.length < 6) {
         errors.password = 'Длинна пароля должна быть не меньше 6 символов';
     }
     // check password for compliance with the pattern
-    else if(!charactersPattern.test(values.password.trim())) {
-        errors.name='Пароль содержит недопустимые символы';
+    else if(charactersPattern.test(values.password.trim())) {
+        errors.password='Пароль содержит недопустимые символы';
     }
 
     //--- Second password check ---
@@ -71,7 +71,7 @@ const validate = (values) => {
     }
      // check second password for emptiness with space
      else if (values.secondPassword.trim() === '') {
-        errors.name = 'Введите повторный пароль';
+        errors.secondPassword = 'Введите повторный пароль';
     }
     // check password for equal with second password 
     else if (values.password && (values.password.trim() !== values.secondPassword.trim())) {
@@ -89,6 +89,9 @@ const SignUpForm = (props) => {
                     <b>Поздравляем!</b> Пользователь <em>{userName}</em> успешно зарегистирован.
                     Перейдите по <Link to='/signin'>сcылке</Link> для авторизации
                 </Alert>
+            }
+            { 
+                error && <Alert color="danger">{error}</Alert> 
             }
             <StyledSignUpForm noValidate onSubmit={handleSubmit}>
                 <div>
@@ -125,9 +128,9 @@ const mapStateToProps = ({signUp}) => {
 };
 
 export default compose(
-    connect(mapStateToProps),
     reduxForm({ 
         form: 'SignUpForm',
         validate
     }),
+    connect(mapStateToProps)
 )(SignUpForm);

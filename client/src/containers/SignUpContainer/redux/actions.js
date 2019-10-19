@@ -12,7 +12,7 @@ export const fetchSignUp = (user) => async (dispatch) => {
         dispatch(fetchSignUpSuccess(response.data));
     }
     catch(err) {
-        dispatch(fetchSignUpFailure(err));
-        //console.log(err);
+        const msg = err.response.data.msg;
+        dispatch(fetchSignUpFailure(msg));
     }
 };
