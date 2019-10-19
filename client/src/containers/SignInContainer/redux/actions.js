@@ -14,7 +14,7 @@ export const fetchSignIn = (user, history) => async (dispatch) => {
         history.push('/');
     }
     catch(err) {
-        dispatch(fetchSignInFailure(err));
-        console.error(err);
+        const msg = err.response.data.msg;
+        dispatch(fetchSignInFailure(msg));
     }
 };
