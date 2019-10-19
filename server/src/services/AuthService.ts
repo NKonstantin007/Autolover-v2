@@ -27,27 +27,19 @@ class AuthService {
         return {
             name: userRecord.name,
             email: userRecord.email
-        }
+        };
     }
     
     public static async signIn(user): Promise<any> {
-        const {email, password} = user;
-        const userRecord = await UserModel.findOne({email});
-        if(!userRecord) {
-            throw new Error('User does not registered');
-        }
+        const userRecord = await UserModel.findOne({ email: user.email });
 
-        const isValidPassword = await bcrypt.compare(password, userRecord.password);
-        if(!isValidPassword) {
-            throw new Error('Password is not valid')
-        }
         return {
             user: {
                 name: userRecord.name,
                 email: userRecord.email
             },
             token: AuthService.generateToken(userRecord)
-        }
+        };
     }
 }
 

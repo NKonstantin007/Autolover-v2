@@ -1,13 +1,15 @@
 import {body} from 'express-validator';
+import bcrypt from 'bcryptjs';
+
 import UserModel from '../models/UserModel';
 
-const charactersPattern = /[0-9a-z_-]/i;   // RegExp to validate the input of valid characters
+const charactersPattern = /[^0-9a-z_-]/i;   // RegExp to validate the input of valid characters
 
 export const SignUpValidators = [
     body('name').trim(' ')
         .not().isEmpty().withMessage('Введите имя')
         .isLength({max: 20}).withMessage('Длина имени должна быть не более 20 символов')
-        .matches(charactersPattern).withMessage('Имя содержит недопустимые символы'),
+        .not().matches(charactersPattern).withMessage('Имя содержит недопустимые символы'),
     body('email').trim(' ')
         .not().isEmpty().withMessage('Введите email')
         .isEmail().withMessage('Email не соответствует шаблону')
@@ -23,20 +25,45 @@ export const SignUpValidators = [
                 console.log(err);
             }
         }),
-    body('password').trim()
+    body('password').trim(' ')
         .not().isEmpty().withMessage('Введите пароль')
         .isLength({min: 6}).withMessage('Длинна пароля должна быть не меньше 6 символов')
-        .matches(charactersPattern).withMessage('Пароль содержит недопустимые символы'),
-    body('secondPassword').trim()
+        .not().matches(charactersPattern).withMessage('Пароль содержит недопустимые символы'),
+    body('secondPassword').trim(' ')
         .not().isEmpty().withMessage('Введите повторный пароль')
-        .custom(async (value, {req}) => {
+        .custom((value, {req}) => {
+            if(value !== req.body.password) {
+                throw new Error('Пароли не совпадают')
+            }
+            return true;
+        })
+];
+
+export const SignInValidators = [
+    body('email').trim(' ')
+        .not().isEmpty().withMessage('Введите email')
+        .isEmail().withMessage('Email не соответствует шаблону')
+        .normalizeEmail()
+        .custom(async (value) => {
             try {
-                if(value !== req.body.password) {
-                    return Promise.reject('Пароли не совпадают')
+                const user = await UserModel.findOne({email: value});
+                if(!user) {
+                    return Promise.reject('Пользователя с таким email не существует');
                 }
             }
             catch(err) {
                 console.log(err);
             }
+        }),
+    body('password').trim(' ')
+        .not().isEmpty().withMessage('Введите пароль')
+        .isLength({min: 6}).withMessage('Длинна пароля должна быть не меньше 6 символов')
+        .not().matches(charactersPattern).withMessage('Пароль содержит недопустимые символы')
+        .custom(async (value, {req}) => {
+            const user = await UserModel.findOne({email: req.body.email});
+            const isValidPassword = await bcrypt.compare(value, user.password);
+            if(!isValidPassword) {
+                return Promise.reject('Неверный пароль');
+            }
         })
-];
+]

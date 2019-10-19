@@ -2,24 +2,28 @@ import {Request, Response, NextFunction} from 'express';
 
 import BaseController from './BaseController';
 import AuthService from '../services/AuthService';
-import validate from '../middlewares/validate';
-import { SignUpValidators } from '../validations/AuthValidators';
+import SyncValidate from '../middlewares/SyncValidate';
+import { SignUpValidators, SignInValidators } from '../validations/AuthValidators';
 
 class AuthController extends BaseController {
 
     public init() {
         this.router.post(
             '/signup',
-            validate(SignUpValidators),
+            SyncValidate(SignUpValidators),
             this.signUp
         );
-        this.router.post('/signin', this.signIn);
+        this.router.post(
+            '/signin', 
+            SyncValidate(SignInValidators),
+            this.signIn
+        );
     }
 
     private async signUp(req: Request, res: Response, next: NextFunction): Promise<Response | void> {
         try{
             const user = await AuthService.signUp(req.body);
-            return res.status(201).json(user);
+            return res.status(201).json({...user, msg: 'Success'});
         }
         catch(err) {
             console.log(err);
