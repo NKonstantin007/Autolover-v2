@@ -1,5 +1,6 @@
 import React from 'react';
 import {Link} from 'react-router-dom';
+import {connect} from 'react-redux';
 
 import {
     StyledAutoHeader,
@@ -12,7 +13,8 @@ import {
  import Button from '../styles/components/Button';
  import FlexBlock from '../styles/components/FlexBlock';
 
-const AutoHeader = () => {
+const AutoHeader = (props) => {
+    const isAuth = props.isAuth
     return (
         <StyledAutoHeader>
             <StyledBrandHeader>
@@ -28,8 +30,10 @@ const AutoHeader = () => {
             <StyledMenuHeader>
                 <FlexBlock direction="column" justify="space-between">
                     <StyledSignInUpButtons>
-                        <Button color="accent" round>Войти</Button>
-                        <Button color="accent" round>Регистрация</Button>
+                        <Button color="accent" round>{ isAuth ? 'Выйти' : 'Войти' }</Button>
+                        {
+                            !isAuth && <Button color="accent" round>Регистрация</Button>
+                        }
                     </StyledSignInUpButtons>
                     <StyledNavHeader>
                         <Link to="/">Главная</Link>
@@ -47,4 +51,11 @@ const AutoHeader = () => {
     );
 }
 
-export default AutoHeader;
+const mapStateToProps = (state) => {
+    const {isAuth} = state.signIn;
+    return {
+        isAuth
+    };
+}
+
+export default connect(mapStateToProps)(AutoHeader);
