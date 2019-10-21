@@ -2,6 +2,8 @@ import mongoose from 'mongoose'
 import {prop, Typegoose} from '@typegoose/typegoose';
 
 class User extends Typegoose {
+    public _id: mongoose.Types.ObjectId;
+
     @prop({required: true})
     public name: string;
 

@@ -25,6 +25,7 @@ class AuthService {
             password: hashedPassword
         });
         return {
+            _id: userRecord._id,
             name: userRecord.name,
             email: userRecord.email
         };
@@ -35,6 +36,7 @@ class AuthService {
 
         return {
             user: {
+                _id: userRecord._id,
                 name: userRecord.name,
                 email: userRecord.email
             },

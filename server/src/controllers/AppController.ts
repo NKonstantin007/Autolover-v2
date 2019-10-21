@@ -1,6 +1,7 @@
 import BaseController from './BaseController';
 import IPathRoute from '../interfaces/IPathRoute';
 import AuthController from './AuthController';
+import AttachCurrentUser from '../middlewares/AttachCurrentUser';
 import isAuth from '../middlewares/isAuth';
 
 class AppController extends BaseController {
@@ -16,7 +17,7 @@ class AppController extends BaseController {
         for(const {path, controller: Controller} of this.routeList) {
             const controller: BaseController = new Controller();
             controller.init();
-            this.router.use(`${path}`, controller.getRouter())
+            this.router.use(`${path}`, controller.getRouter());
         }
     }
 }
