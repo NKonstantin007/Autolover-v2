@@ -3,6 +3,8 @@ import bcrypt from 'bcryptjs';
 
 import UserModel from '../models/UserModel';
 import config from '../config';
+import getTokenFromHeader from '../utils/getTokenFromHeader';
+
 
 class AuthService {
 
@@ -13,7 +15,7 @@ class AuthService {
             name,
             email
         };
-        return jwt.sign({data}, config.jwtSecret, {expiresIn: 100});
+        return jwt.sign({data}, config.jwt.secret, {expiresIn: config.jwt.expiresIn});
     }
 
     public static async signUp(user): Promise<any> {
@@ -42,6 +44,17 @@ class AuthService {
             },
             token: AuthService.generateToken(userRecord)
         };
+    }
+
+    public static async refreshToken(token): Promise<any> {
+        try{
+            const decoded = jwt.verify(token, config.jwt.secret);
+            return AuthService.generateToken(decoded.data);
+        }
+        catch(err) {
+            console.log(err);
+            return false;
+        }
     }
 }
 

@@ -6,6 +6,7 @@ import SyncValidate from '../middlewares/SyncValidate';
 import AttachCurrentUser from '../middlewares/AttachCurrentUser';
 import isAuth from '../middlewares/isAuth';
 import { SignUpValidators, SignInValidators } from '../validations/AuthValidators';
+import getTokenFromHeader from '../utils/getTokenFromHeader';
 
 class AuthController extends BaseController {
 
@@ -25,7 +26,12 @@ class AuthController extends BaseController {
             isAuth,
             AttachCurrentUser,
             this.currentUser
-        )
+        );
+        this.router.get(
+            '/refresh',
+            isAuth,
+            this.refreshToken
+        );
     }
 
     private async signUp(req: Request, res: Response, next: NextFunction): Promise<Response | void> {
@@ -57,6 +63,25 @@ class AuthController extends BaseController {
         }
         return res.json(user);
     } 
+
+    private async refreshToken(req: Request, res: Response, next: NextFunction): Promise<Response | void> {
+        try {
+            const token = getTokenFromHeader(req);
+            const newToken = await AuthService.refreshToken(token);
+            if(newToken) {
+                return res.json({
+                    token: newToken
+                });
+            }
+            else {
+                return res.sendStatus(401);
+            }
+        }
+        catch(err) {
+            console.log(err);
+            return next(err);
+        }
+    }
 }
 
 export default AuthController;

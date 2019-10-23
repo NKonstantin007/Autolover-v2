@@ -4,7 +4,7 @@ import config from '../config';
 import getTokenFromHeader from '../utils/getTokenFromHeader';
 
 export default jwt({
-  secret: config.jwtSecret,
+  secret: config.jwt.secret,
   userProperty: 'token', 
   getToken: getTokenFromHeader
 });
