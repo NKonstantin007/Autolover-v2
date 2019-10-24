@@ -39,8 +39,6 @@ class AuthService {
         return {
             user: {
                 _id: userRecord._id,
-                name: userRecord.name,
-                email: userRecord.email
             },
             token: AuthService.generateToken(userRecord)
         };

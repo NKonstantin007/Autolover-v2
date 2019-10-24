@@ -48,7 +48,7 @@ class AuthController extends BaseController {
     private async signIn(req: Request, res: Response, next: NextFunction): Promise<Response | void> {
         try{
             const {user, token} = await AuthService.signIn(req.body);
-            return res.status(200).json({_id: user._id, token, msg: 'Success'});
+            return res.status(200).json({_id: user._id, token, message: 'Success'});
         }
         catch(err) {
             console.log(err);
