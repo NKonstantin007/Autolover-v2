@@ -9,26 +9,20 @@ import {
 const defaultState = {
     isFetching: false,
     error: null,
-    isAuth: false,
-    user: null
 };
 
 export default handleActions({
     [fetchSignInRequest](state) {
         return {
             ...state,
-            error: null,
-            isFetching: true,
-            user: null
+            isFetching: true
         };
     },
-    [fetchSignInSuccess](state, {payload}) {
+    [fetchSignInSuccess](state) {
         return {
             ...state,
             error: null,
-            isFetching: false,
-            user: payload,
-            isAuth: true
+            isFetching: false
         };
     },
     [fetchSignInFailure](state, { payload }) {

@@ -5,7 +5,7 @@ import authApi from './authApi';
  * @param {Callback} callback request that need authorization
  * @return {Request} result of request 
  */
-export async function axiosWithAuth(callback) {
+const axiosWithAuth = (callback) => async () => {
     try {
         if(localStorage.getItem('autoloverToken')) {
             const response = await authApi.refreshToken();
@@ -18,6 +18,7 @@ export async function axiosWithAuth(callback) {
         }
     }
     catch (err) {
-        console.log(err.response);
+        console.log(err);
     }
 }
+export default axiosWithAuth;
