@@ -3,5 +3,6 @@ import get from './base/get';
 import axiosWithAuth from './axiosWithAuth';
 
 export default {
-    getCurrent: axiosWithAuth(() => get(`${baseUrl}/auth/current`))
+    getCurrent: axiosWithAuth(() => get(`${baseUrl}/auth/current`)),
+    signOutCurrentUser: () => get(`${baseUrl}/auth/signout`)
 };

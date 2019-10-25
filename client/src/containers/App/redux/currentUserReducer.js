@@ -3,7 +3,10 @@ import {handleActions} from 'redux-actions';
 import {
     fetchCurrentUserRequest,
     fetchCurrentUserSuccess,
-    fetchCurrentUserFailure
+    fetchCurrentUserFailure,
+    signOutCurrentUserRequest,
+    signOutCurrentUserSuccess,
+    signOutCurrentUserFailure
 } from './acitons';
 
 const defaultState = {
@@ -34,6 +37,29 @@ export default handleActions({
             ...state,
             error: payload,
             isFetching: false
+        }
+    },
+    [signOutCurrentUserRequest]: (state) => {
+        return {
+            ...state,
+            isFetching: true,
+            error: null
+        }
+    },
+    [signOutCurrentUserSuccess]: (state) => {
+        return {
+            ...state,
+            user: null,
+            isAuth: false,
+            isFetching: false,
+        }
+    },
+    [signOutCurrentUserFailure]: (state) => {
+        return {
+            ...state,
+            user: null,
+            isAuth: false,
+            isFetching: false,
         }
     }
 }, defaultState);

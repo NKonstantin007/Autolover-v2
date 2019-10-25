@@ -1,4 +1,5 @@
 import authApi from './authApi';
+import showResponseError from '../utils/showResponseError'
 
 /**
  * Done request to server and before token refreshes
@@ -6,19 +7,14 @@ import authApi from './authApi';
  * @return {Request} result of request 
  */
 const axiosWithAuth = (callback) => async () => {
-    try {
-        if(localStorage.getItem('autoloverToken')) {
-            const response = await authApi.refreshToken();
-            const token = response.data.token;
-            localStorage.setItem('autoloverToken', token);
-            return callback();
-        }
-        else {
-            console.log('Ошибка авторизации');
-        }
+    if(localStorage.getItem('autoloverToken')) {
+        const response = await authApi.refreshToken();
+        const token = response.data.token;
+        localStorage.setItem('autoloverToken', token);
+        return callback();
     }
-    catch (err) {
-        console.log(err);
+    else {
+        showResponseError('Ошибка авторизации');
     }
 }
 export default axiosWithAuth;

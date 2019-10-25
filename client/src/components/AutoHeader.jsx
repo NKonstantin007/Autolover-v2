@@ -12,19 +12,24 @@ import {
     StyledProfile,
     StyledSignInUpButtons,
  } from './styles/AutoHeader';
- import Button from '../styles/components/Button';
- import FlexBlock from '../styles/components/FlexBlock';
+import Button from '../styles/components/Button';
+import FlexBlock from '../styles/components/FlexBlock';
+import {signOutCurrentUser} from '../containers/App/redux/acitons';
 
-const AutoHeader = ({isAuth, history, user}) => {
+
+const AutoHeader = (props) => {
+
+    const {isAuth, history, user, signOutCurrentUser} = props;
 
     const onSignInOrOutClick = () => {
         if(isAuth) {
-            console.log('sign out user');
+            signOutCurrentUser(history);
         }
         else {
             history.push('/signin');
         }
     }
+
     const onSignUpClick = () => {
         history.push('/signup');
     }
@@ -90,7 +95,11 @@ const mapStateToProps = (state) => {
     };
 }
 
+const mapDispatchToProps = {
+    signOutCurrentUser
+};
+
 export default compose(
     withRouter,
-    connect(mapStateToProps)
+    connect(mapStateToProps, mapDispatchToProps)
 )(AutoHeader);

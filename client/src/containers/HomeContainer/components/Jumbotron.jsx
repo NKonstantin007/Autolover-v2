@@ -15,7 +15,7 @@ const Jumbotron = (props) => {
             <JumbotronTitle>Посвящается автомобильной отрасли</JumbotronTitle>
             <JumbotronText>Как и многие популярные автомобильные сайты, мы рады предоставить целый комплекс сервисов и информационно аналитических материалов для опытных водителей, новичков и тех, кто только планирует сесть за руль</JumbotronText>
             { 
-                !isAuth && <JumbotronSignUpLink to="/">Зарегистрируйтесь сейчас</JumbotronSignUpLink>
+                !isAuth && <JumbotronSignUpLink to="/signup">Зарегистрируйтесь сейчас</JumbotronSignUpLink>
             }
         </StyledJumbotron>
     );

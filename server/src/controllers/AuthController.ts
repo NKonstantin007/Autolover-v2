@@ -32,6 +32,11 @@ class AuthController extends BaseController {
             isAuth,
             this.refreshToken
         );
+        this.router.get(
+            '/signout',
+            isAuth,
+            this.signOut
+        );
     }
 
     private async signUp(req: Request, res: Response, next: NextFunction): Promise<Response | void> {
@@ -78,6 +83,17 @@ class AuthController extends BaseController {
             }
         }
         catch(err) {
+            console.log(err);
+            return next(err);
+        }
+    }
+
+    private async signOut(req: Request, res: Response, next: NextFunction): Promise<Response | void> {
+        try {
+            req.user = null;
+            return res.status(200).json('Signed out');
+        }
+        catch (err) {
             console.log(err);
             return next(err);
         }
