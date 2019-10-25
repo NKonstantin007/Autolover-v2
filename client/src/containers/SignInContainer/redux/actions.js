@@ -2,6 +2,7 @@ import {createAction} from 'redux-actions';
 
 import authApi from '../../../api/authApi';
 import {fetchCurrentUser} from '../../App/redux/acitons';
+import showResponseError from '../../../utils/showResponseError';
 
 export const fetchSignInRequest = createAction('FETCH_SIGN_IN_REQUEST');
 export const fetchSignInSuccess = createAction('FETCH_SIGN_IN_SUCCESS');
@@ -17,7 +18,7 @@ export const fetchSignIn = (user, history) => async (dispatch) => {
         history.push('/');
     }
     catch(err) {
-        const msg = err.response.data.msg;
-        dispatch(fetchSignInFailure(msg));
+        showResponseError(err);
+        dispatch(fetchSignInFailure(err));
     }
 };

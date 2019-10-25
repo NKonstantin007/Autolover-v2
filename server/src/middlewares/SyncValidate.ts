@@ -11,7 +11,7 @@ export default (validations): Handler => (
             if (errors.isEmpty()) {
                 return next();
             }
-            res.status(422).json({ msg: errors.array()[0].msg });
+            res.status(422).json({ message: errors.array()[0].msg });
         }
         catch(err) {
             console.log(err);

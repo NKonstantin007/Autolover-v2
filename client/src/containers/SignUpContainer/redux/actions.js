@@ -1,5 +1,6 @@
 import {createAction} from 'redux-actions';
 import authApi from '../../../api/authApi';
+import showResponseError from '../../../utils/showResponseError';
 
 export const fetchSignUpRequest = createAction('FETCH_SIGN_UP_REQUEST');
 export const fetchSignUpSuccess = createAction('FETCH_SIGN_UP_SUCCESS');
@@ -12,7 +13,7 @@ export const fetchSignUp = (user) => async (dispatch) => {
         dispatch(fetchSignUpSuccess(response.data));
     }
     catch(err) {
-        const msg = err.response.data.msg;
-        dispatch(fetchSignUpFailure(msg));
+        showResponseError(err);
+        dispatch(fetchSignUpFailure(err));
     }
 };

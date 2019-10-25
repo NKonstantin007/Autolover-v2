@@ -2,7 +2,6 @@ import React from 'react';
 import {reduxForm, Field} from 'redux-form';
 import {compose} from 'redux';
 import {connect} from 'react-redux';
-import {Alert} from 'reactstrap';
 
 import StyledSignInForm from './styles/SignInForm';
 import Input from '../../../components/formElements/Input'
@@ -50,22 +49,17 @@ const validate = (values) => {
 const SignInForm = (props) => {
     const {handleSubmit, error} = props;
     return (
-        <React.Fragment>
-            { 
-                error && <Alert color="danger">{error}</Alert> 
-            }
-            <StyledSignInForm noValidate onSubmit={handleSubmit}>
-                <div>
-                    <Label>Email</Label>
-                    <Field name="email" type="email" component={Input} />
-                </div>
-                <div>
-                    <Label>Пароль</Label>
-                    <Field name="password" type="password" component={Input} />
-                </div>
-                <Button type="submit" color="primary">Вход</Button>
-            </StyledSignInForm> 
-        </React.Fragment>
+        <StyledSignInForm noValidate onSubmit={handleSubmit}>
+            <div>
+                <Label>Email</Label>
+                <Field name="email" type="email" component={Input} />
+            </div>
+            <div>
+                <Label>Пароль</Label>
+                <Field name="password" type="password" component={Input} />
+            </div>
+            <Button type="submit" color="primary">Вход</Button>
+        </StyledSignInForm> 
     );
 }
 
