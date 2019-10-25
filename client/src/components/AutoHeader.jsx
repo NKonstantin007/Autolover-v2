@@ -1,6 +1,8 @@
 import React from 'react';
 import {Link} from 'react-router-dom';
 import {connect} from 'react-redux';
+import {compose} from 'redux';
+import {withRouter} from 'react-router-dom'
 
 import {
     StyledAutoHeader,
@@ -13,8 +15,20 @@ import {
  import Button from '../styles/components/Button';
  import FlexBlock from '../styles/components/FlexBlock';
 
-const AutoHeader = (props) => {
-    const isAuth = props.isAuth
+const AutoHeader = ({isAuth, history, user}) => {
+
+    const onSignInOrOutClick = () => {
+        if(isAuth) {
+            console.log('sign out user');
+        }
+        else {
+            history.push('/signin');
+        }
+    }
+    const onSignUpClick = () => {
+        history.push('/signup');
+    }
+
     return (
         <StyledAutoHeader>
             <StyledBrandHeader>
@@ -30,9 +44,22 @@ const AutoHeader = (props) => {
             <StyledMenuHeader>
                 <FlexBlock direction="column" justify="space-between">
                     <StyledSignInUpButtons>
-                        <Button color="accent" round>{ isAuth ? 'Выйти' : 'Войти' }</Button>
+                        <Button 
+                            color="accent" 
+                            round
+                            onClick={onSignInOrOutClick}
+                        >
+                            { isAuth ? 'Выйти' : 'Войти' }
+                        </Button>
                         {
-                            !isAuth && <Button color="accent" round>Регистрация</Button>
+                            !isAuth && (
+                                <Button 
+                                    color="accent" 
+                                    round
+                                    onClick={onSignUpClick}
+                                >Регистрация
+                                </Button>
+                            )
                         }
                     </StyledSignInUpButtons>
                     <StyledNavHeader>
@@ -42,20 +69,28 @@ const AutoHeader = (props) => {
                         <Link to="/reviews">Обзоры автомобилей</Link>
                     </StyledNavHeader>
                 </FlexBlock>
-                <StyledProfile>
-                    <img src="/images/avatar.png" alt="avatar"></img>
-                    <span>driverK</span>
-                </StyledProfile>
+                {
+                    isAuth && (
+                        <StyledProfile>
+                            <img src="/images/avatar.png" alt="avatar"></img>
+                            <span>{user.name}</span>
+                        </StyledProfile>
+                    )
+                }
             </StyledMenuHeader>
         </StyledAutoHeader>
     );
 }
 
 const mapStateToProps = (state) => {
-    const {isAuth} = state.signIn;
+    const {isAuth, user} = state.currentUser;
     return {
-        isAuth
+        isAuth,
+        user: user
     };
 }
 
-export default connect(mapStateToProps)(AutoHeader);
+export default compose(
+    withRouter,
+    connect(mapStateToProps)
+)(AutoHeader);

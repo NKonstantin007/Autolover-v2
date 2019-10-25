@@ -22,7 +22,7 @@ const Jumbotron = (props) => {
 }
 
 const mapStateToProps = (state) => {
-    const {isAuth} = state.signIn;
+    const {isAuth} = state.currentUser;
     return {
         isAuth
     };
