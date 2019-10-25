@@ -12,6 +12,9 @@ class User extends Typegoose {
 
     @prop({required: true})
     public password: string;
+
+    @prop({default: ''})
+    public aboutMe: string;
 }
 
 const UserModel = new User().getModelForClass(User);

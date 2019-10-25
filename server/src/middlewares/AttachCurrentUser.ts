@@ -17,7 +17,8 @@ export default (req: Request, res: Response, next: NextFunction) => {
         req.user = {
             _id: user._id,
             name: user.name,
-            email: user.email
+            email: user.email,
+            aboutMe: user.aboutMe
         };
         next();
     });
