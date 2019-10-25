@@ -13,7 +13,7 @@ const spinner = keyframes`
     }
 `;
 
-const StyledSpinner = styled.div`
+export const StyledSpinner = styled.div`
     position: relative;
     width: 200px !important;
     height: 200px !important;
@@ -56,4 +56,8 @@ const StyledSpinner = styled.div`
     }
 `;
 
-export default StyledSpinner;
+export const SpinnerWrapper = styled.div`
+    display: flex;
+    justify-content: center;
+    align-items: center;
+`;

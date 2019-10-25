@@ -47,7 +47,7 @@ const validate = (values) => {
   }
 
 const SignInForm = (props) => {
-    const {handleSubmit, error} = props;
+    const {handleSubmit, isFetching} = props;
     return (
         <StyledSignInForm noValidate onSubmit={handleSubmit}>
             <div>
@@ -58,15 +58,15 @@ const SignInForm = (props) => {
                 <Label>Пароль</Label>
                 <Field name="password" type="password" component={Input} />
             </div>
-            <Button type="submit" color="primary">Вход</Button>
+            <Button type="submit" color="primary" disabled={isFetching}>Вход</Button>
         </StyledSignInForm> 
     );
 }
 
 const mapStateToProps = ({signIn}) => {
-    const {error} = signIn;
+    const {isFetching} = signIn;
     return {
-        error
+        isFetching
     };
 };
 

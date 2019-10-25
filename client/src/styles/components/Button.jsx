@@ -56,6 +56,11 @@ const Button = styled.button`
         border: none;
         cursor: pointer;
     }
+
+    &:disabled {
+        pointer-events: none;
+        opacity: 0.7;
+    }
 `;
 
 export default Button;

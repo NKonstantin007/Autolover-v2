@@ -1,15 +1,17 @@
 import React from 'react';
 
-import StyledSpinner from './styles/Spinner';
+import {StyledSpinner, SpinnerWrapper} from './styles/Spinner';
 
 const Spinner = () => {
     return (
-        <StyledSpinner>
-             <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-        </StyledSpinner>
+        <SpinnerWrapper>
+            <StyledSpinner>
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+            </StyledSpinner>
+        </SpinnerWrapper>
     )
 }
 

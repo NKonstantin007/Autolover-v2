@@ -6,6 +6,7 @@ import {withRouter} from 'react-router-dom'
   
 import SignInForm from './components/SignInForm';
 import {SignInWrapper, SignInText, SignInTitle} from './components/styles';
+import Spinner from '../../components/Spinner';
 import {fetchSignIn} from './redux/actions';
 
 const SignInContainer = (props) => {
@@ -26,6 +27,9 @@ const SignInContainer = (props) => {
             <Container>
                 <Row>
                     <Col md={{size: 4, offset: 4}} sm={{size: 6, offset: 3}} xs={{size: 10, offset: 1}}>
+                        {
+                            props.isFetching && <Spinner />
+                        }
                         <SignInTitle>Авторизация</SignInTitle>
                         <SignInText>Войдите используя свой email и пароль</SignInText>
                         <SignInForm onSubmit={onSignIn} />
@@ -36,11 +40,17 @@ const SignInContainer = (props) => {
     );
 }
 
+const mapStateToProps = ({signIn}) => {
+    return {
+        isFetching: signIn.isFetching
+    };
+}
+
 const mapDispatchToProps = {
         fetchSignIn
 };
 
 export default compose(
     withRouter,
-    connect(null, mapDispatchToProps)
+    connect(mapStateToProps, mapDispatchToProps)
 )(SignInContainer);
