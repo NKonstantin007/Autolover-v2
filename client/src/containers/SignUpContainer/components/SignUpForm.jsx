@@ -9,6 +9,7 @@ import {SignUpFormWrapper, StyledSignUpForm}from './styles/SignUpForm';
 import Input from '../../../components/formElements/Input'
 import Label from '../../../components/formElements/styles/Label';
 import Button from '../../../styles/components/Button';
+import Spinner from '../../../components/Spinner';
 
 const validate = (values) => {
     const charactersPattern = /[^0-9a-z_-]/i;   // RegExp to validate the input of valid characters
@@ -81,7 +82,7 @@ const validate = (values) => {
   }
 
 const SignUpForm = (props) => {
-    const {handleSubmit, userName, error} = props;
+    const {handleSubmit, userName, error, isFetching} = props;
     return (
         <SignUpFormWrapper>
             {
@@ -91,7 +92,7 @@ const SignUpForm = (props) => {
                 </Alert>
             }
             { 
-                error && <Alert color="danger">{error}</Alert> 
+                isFetching && <Spinner />
             }
             <StyledSignUpForm noValidate onSubmit={handleSubmit}>
                 <div>
@@ -113,17 +114,18 @@ const SignUpForm = (props) => {
                     <Label>Повторный пароль</Label>
                     <Field name="secondPassword" type="password" component={Input} />
                 </div>
-                <Button type="submit" color="primary">Зарегистрироваться</Button>
+                <Button type="submit" color="primary" disabled={isFetching}>Зарегистрироваться</Button>
             </StyledSignUpForm>
         </SignUpFormWrapper>
     );
 }
 
 const mapStateToProps = ({signUp}) => {
-    const {userName, error} = signUp;
+    const {userName, error, isFetching} = signUp;
     return {
         userName,
-        error
+        error,
+        isFetching
     };
 };
 

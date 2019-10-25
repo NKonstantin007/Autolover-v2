@@ -17,8 +17,6 @@ export const StyledSpinner = styled.div`
     position: relative;
     width: 200px !important;
     height: 200px !important;
-    -webkit-transform: translate(-100px, -100px) scale(1) translate(100px, 100px);
-    transform: translate(-100px, -100px) scale(1) translate(100px, 100px);
 
     div {
         position: absolute;
