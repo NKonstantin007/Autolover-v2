@@ -1,5 +1,6 @@
 import React from 'react';
 import {Link} from 'react-router-dom';
+import {connect} from 'react-redux';
  
 import {
     CardMenuWrapper,
@@ -12,8 +13,13 @@ import {
 
 import Jumbotron from './components/Jumbotron';
 import Slider from '../../components/Slider';
+import Spinner from '../../components/Spinner';
 
-const HomeContainer = () => {
+const HomeContainer = (props) => {
+    if(props.isFetching) {
+        return <Spinner />
+    }
+
     return (
         <div>
             <Slider />
@@ -68,4 +74,11 @@ const HomeContainer = () => {
     );
 }
 
-export default HomeContainer;
+const mapStateToProps = ({currentUser}) => {
+    const {isFetching} = currentUser;
+    return {
+        isFetching
+    };
+}
+
+export default connect(mapStateToProps)(HomeContainer);
