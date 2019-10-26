@@ -3,6 +3,7 @@ import {connect} from 'react-redux';
 import { Container, Row, Col } from 'reactstrap';
 
 import SignUpAnnouncement from './components/SignUpAnnouncement';
+import Slider from '../../components/Slider';
 import SignUpForm from './components/SignUpForm';
 import {fetchSignUp} from './redux/actions';
 
@@ -20,6 +21,7 @@ const SignUpContainer = (props) => {
 
     return (
         <React.Fragment>
+            <Slider />
             <Container>
                 <Row>
                     <Col md="8" sm="6" xs="12">

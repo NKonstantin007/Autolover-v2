@@ -21,8 +21,8 @@ class Slider extends Component{
     }
 
     componentDidMount() {
+        this.slideEffect();
         $.fx.speeds.fast = 300;
-        this.updateSlide();
         this.intervalId = setInterval(this.updateSlide, 8000);
     }
 

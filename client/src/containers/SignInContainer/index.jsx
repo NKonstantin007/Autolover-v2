@@ -5,6 +5,7 @@ import {compose} from 'redux';
 import {withRouter} from 'react-router-dom'
   
 import SignInForm from './components/SignInForm';
+import Slider from '../../components/Slider';
 import {SignInWrapper, SignInText, SignInTitle} from './components/styles';
 import Spinner from '../../components/Spinner';
 import {fetchSignIn} from './redux/actions';
@@ -23,20 +24,23 @@ const SignInContainer = (props) => {
     }
 
     return (
-        <SignInWrapper>
-            <Container>
-                <Row>
-                    <Col md={{size: 4, offset: 4}} sm={{size: 6, offset: 3}} xs={{size: 10, offset: 1}}>
-                        {
-                            props.isFetching && <Spinner />
-                        }
-                        <SignInTitle>Авторизация</SignInTitle>
-                        <SignInText>Войдите используя свой email и пароль</SignInText>
-                        <SignInForm onSubmit={onSignIn} />
-                    </Col>
-                </Row>
-            </Container>
-        </SignInWrapper>
+        <React.Fragment>
+            <Slider />
+            <SignInWrapper>
+                <Container>
+                    <Row>
+                        <Col md={{size: 4, offset: 4}} sm={{size: 6, offset: 3}} xs={{size: 10, offset: 1}}>
+                            {
+                                props.isFetching && <Spinner />
+                            }
+                            <SignInTitle>Авторизация</SignInTitle>
+                            <SignInText>Войдите используя свой email и пароль</SignInText>
+                            <SignInForm onSubmit={onSignIn} />
+                        </Col>
+                    </Row>
+                </Container>
+            </SignInWrapper>
+        </React.Fragment>
     );
 }
 

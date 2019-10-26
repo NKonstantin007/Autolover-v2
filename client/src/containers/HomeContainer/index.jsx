@@ -11,10 +11,12 @@ import {
 } from './components/styles/CardMenu';
 
 import Jumbotron from './components/Jumbotron';
+import Slider from '../../components/Slider';
 
 const HomeContainer = () => {
     return (
         <div>
+            <Slider />
             <Jumbotron />
             <CardMenuWrapper>
                 <div>

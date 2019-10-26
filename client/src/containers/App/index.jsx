@@ -6,7 +6,6 @@ import Alert from 'react-s-alert';
 import store from './redux/store';
 import Routes from './components/Routes';
 import AutoHeader from '../../components/AutoHeader';
-import Slider from '../../components/Slider';
 import AutoFooter from '../../components/AutoFooter';
 
 import 'bootstrap/dist/css/bootstrap.min.css';
@@ -20,7 +19,6 @@ const AppContainer = () => {
             <Provider store={store}>
                 <BrowserRouter>
                     <AutoHeader />
-                    <Slider />
                     <Routes />
                     <AutoFooter />
                     <Alert 
