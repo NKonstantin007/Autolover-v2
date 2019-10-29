@@ -24,7 +24,11 @@ const StyledInput = styled.div`
     background: transparent;
     padding: 0.5rem 0.5rem 0 0.5rem;
     margin-bottom: 0.5rem;
-    font-size: 12px;
+    font-size: ${props => {
+      if(props.fontSize === 'small') return '12px';
+      if(props.fontSize === 'big') return '18px';
+      return '12px';
+    }};
     width: 100%;
     color:  ${MainTextColor};
     font-family: Barlow;
