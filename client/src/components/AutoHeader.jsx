@@ -76,7 +76,7 @@ const AutoHeader = (props) => {
                 </FlexBlock>
                 {
                     isAuth && (
-                        <StyledProfile>
+                        <StyledProfile to="/profile">
                             <img src="/images/avatar.png" alt="avatar"></img>
                             <span>{user.name}</span>
                         </StyledProfile>

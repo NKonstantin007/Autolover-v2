@@ -1,4 +1,5 @@
 import styled from '@emotion/styled';
+import {Link} from 'react-router-dom';
 import {
     AccentColor,
     PrimaryLightColor,
@@ -71,7 +72,7 @@ export const StyledSignInUpButtons = styled.div`
     }
 `;
 
-export const StyledProfile = styled.div`
+export const StyledProfile = styled(Link)`
 
     display: flex;
     flex-direction: column;
