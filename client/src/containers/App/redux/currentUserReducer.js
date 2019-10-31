@@ -6,7 +6,10 @@ import {
     fetchCurrentUserFailure,
     signOutCurrentUserRequest,
     signOutCurrentUserSuccess,
-    signOutCurrentUserFailure
+    signOutCurrentUserFailure,
+    updateCurrentUserRequest,
+    updateCurrentUserSuccess,
+    updateCurrentUserFailure
 } from './acitons';
 
 const defaultState = {
@@ -52,7 +55,7 @@ export default handleActions({
             user: null,
             isAuth: false,
             isFetching: false,
-        }
+        };
     },
     [signOutCurrentUserFailure]: (state) => {
         return {
@@ -60,6 +63,27 @@ export default handleActions({
             user: null,
             isAuth: false,
             isFetching: false,
-        }
+        };
+    },
+    [updateCurrentUserRequest]: (state) => {
+        return {
+            ...state,
+            isFetching: true,
+            error: null
+        };
+    },
+    [updateCurrentUserSuccess]: (state, {payload}) => {
+        return {
+            ...state,
+            isFetching: false,
+            user: payload
+        };
+    },
+    [updateCurrentUserFailure]: (state, {payload}) => {
+        return {
+            ...state,
+            isFetching: false,
+            error: payload
+        };
     }
 }, defaultState);

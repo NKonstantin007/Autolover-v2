@@ -1,12 +1,13 @@
 import BaseController from './BaseController';
 import IPathRoute from '../interfaces/IPathRoute';
-import AuthController from './AuthController';
-import AttachCurrentUser from '../middlewares/AttachCurrentUser';
 import isAuth from '../middlewares/isAuth';
+import AuthController from './AuthController';
+import UserController from './UserController';
 
 class AppController extends BaseController {
     private routeList: IPathRoute[] = [
-        {path: '/auth', controller: AuthController}
+        {path: '/auth', controller: AuthController},
+        {path: '/user', controller: UserController}
     ];
     
     public init() {

@@ -6,12 +6,12 @@ import showResponseError from '../utils/showResponseError'
  * @param {Callback} callback request that need authorization
  * @return {Request} result of request 
  */
-const axiosWithAuth = (callback) => async () => {
+const axiosWithAuth = (callback) => async (body) => {
     if(localStorage.getItem('autoloverToken')) {
         const response = await authApi.refreshToken();
         const token = response.data.token;
         localStorage.setItem('autoloverToken', token);
-        return callback();
+        return callback(body);
     }
     else {
         showResponseError('Ошибка авторизации');

@@ -12,6 +12,10 @@ export const signOutCurrentUserRequest = createAction('SIGN_OUT_CURRENT_USER_REQ
 export const signOutCurrentUserSuccess = createAction('SIGN_OUT_CURRENT_USER_SUCCESS');
 export const signOutCurrentUserFailure = createAction('SIGN_OUT_CURRENT_USER_FAILURE');
 
+export const updateCurrentUserRequest = createAction('UPDATE_CURRENT_USER_REQUEST');
+export const updateCurrentUserSuccess = createAction('UPDATE_CURRENT_USER_SUCCESS');
+export const updateCurrentUserFailure = createAction('UPDATE_CURRENT_USER_FAILURE');
+
 export const fetchCurrentUser = () => async (dispatch) => {
     try {
         dispatch(fetchCurrentUserRequest());
@@ -45,5 +49,18 @@ export const signOutCurrentUser = (history) => async (dispatch) => {
         showResponseError(err);
         console.log(err);
         dispatch(signOutCurrentUserFailure(err));
+    }
+}
+
+export const updateCurrentUser = (user) => async (dispatch) => {
+    try {
+        dispatch(updateCurrentUserRequest());
+        const response = await userApi.updateCurrentUser(user);
+        dispatch(updateCurrentUserSuccess(response.data));
+    }
+    catch(err) {
+        showResponseError(err);
+        console.log(err);
+        dispatch(updateCurrentUserFailure(err));
     }
 }

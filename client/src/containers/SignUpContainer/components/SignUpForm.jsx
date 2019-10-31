@@ -97,22 +97,22 @@ const SignUpForm = (props) => {
             <StyledSignUpForm noValidate onSubmit={handleSubmit}>
                 <div>
                     <Label>Имя</Label>
-                    <Field name="name" type="text" component={Input} />
+                    <Field name="name" type="text" component={Input} fontSize="small" />
                 </div>
 
                 <div>
                     <Label>Email</Label>
-                    <Field name="email" type="email" component={Input} />
+                    <Field name="email" type="email" component={Input} fontSize="small" />
                 </div>
 
                 <div>
                     <Label>Пароль</Label>
-                    <Field name="password" type="password" component={Input} />
+                    <Field name="password" type="password" component={Input} fontSize="small" />
                 </div>
 
                 <div>
                     <Label>Повторный пароль</Label>
-                    <Field name="secondPassword" type="password" component={Input} />
+                    <Field name="secondPassword" type="password" component={Input} fontSize="small" />
                 </div>
                 <Button type="submit" color="primary" disabled={isFetching}>Зарегистрироваться</Button>
             </StyledSignUpForm>

@@ -6,9 +6,9 @@ import ProfileField from './ProfileField';
 import Button from '../../../styles/components/Button';
 import FlexBlock from '../../../styles/components/FlexBlock';
 
-const ProfileForm = () => {
+const ProfileForm = ({handleSubmit}) => {
     return (
-        <form>
+        <form onSubmit={handleSubmit}>
             <Container>
                 <Row>
                     <Col xs="12" md="5">
@@ -21,7 +21,7 @@ const ProfileForm = () => {
                         <Field name="name" type="text" component={ProfileField} labelKey="Имя"/>
                         <Field name="email" type="text" component={ProfileField} labelKey="Email"/>
                         <Field name="aboutMe" type="text" component={ProfileField} labelKey="О себе"/>
-                        <Button color="primary" type="button" >Сохранить</Button>
+                        <Button color="primary" type="submit" >Сохранить</Button>
                     </Col>
                 </Row>
             </Container>
