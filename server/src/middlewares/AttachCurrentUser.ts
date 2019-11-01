@@ -13,7 +13,7 @@ export default (req: Request, res: Response, next: NextFunction) => {
             next();
         }
         const _id = decoded.data._id;
-        req.user = await UserModel.findById(_id).select({password: 0});
+        req.user = await UserModel.findById(_id).select({password: 0}).lean();
         next();
     });
 }

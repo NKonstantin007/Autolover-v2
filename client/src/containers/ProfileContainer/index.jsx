@@ -4,23 +4,33 @@ import {connect} from 'react-redux';
 import {ProfileWrapper} from './components/styles';
 import ProfileForm from  './components/ProfileForm';
 import Spinner from '../../components/Spinner';
-import {updateCurrentUser} from '../App/redux/acitons';
+import {updateCurrentUser, updateAvatarCurrentUser} from '../App/redux/acitons';
 
-const ProfileContainer = ({user, isFetching, updateCurrentUser}) => {
+const ProfileContainer = (props) => {
 
-    const onUpdateCurrentUser = async (updatedUser) => {
-        try {
-            await updateCurrentUser(updatedUser);
-        }
-        catch(err) {
-            console.log(err);
-        }
+    const {
+        user, isFetching, updateCurrentUser, updateAvatarCurrentUser
+    } = props;
+
+    const updateCurrentUserHandler = async (updatedUser) => {
+        await updateCurrentUser(updatedUser);
+    }
+
+    const updateAvatarCurrentUserHandler = async (avatar) => {
+        await updateAvatarCurrentUser(avatar);
     }
 
     return (
         <ProfileWrapper>
             { isFetching && <Spinner /> }
-            { !isFetching && <ProfileForm initialValues={user} onSubmit={onUpdateCurrentUser} /> }
+            { 
+                !isFetching && 
+                <ProfileForm 
+                    initialValues={user} 
+                    onSubmit={updateCurrentUserHandler}
+                    onUpdateAvatarCurrentUser={updateAvatarCurrentUserHandler}
+                /> 
+            }
         </ProfileWrapper>
     );
 }
@@ -34,7 +44,8 @@ const mapStateToProps = ({currentUser}) => {
 };
 
 const mapDispatchToProps = {
-    updateCurrentUser
+    updateCurrentUser,
+    updateAvatarCurrentUser
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(ProfileContainer);

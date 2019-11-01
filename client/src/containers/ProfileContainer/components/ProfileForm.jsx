@@ -2,11 +2,18 @@ import React from 'react';
 import {Container, Row, Col} from 'reactstrap'
 import {reduxForm, Field} from 'redux-form';
 
+
 import ProfileField from './ProfileField';
 import Button from '../../../styles/components/Button';
 import FlexBlock from '../../../styles/components/FlexBlock';
+import {DownloadIcon} from '../../../styles/icons';
+import FileInput from '../../../components/formElements/FileInput';
 
-const ProfileForm = ({handleSubmit}) => {
+const ProfileForm = (props) => {
+    const {
+        handleSubmit,
+        onUpdateAvatarCurrentUser
+    } = props;
     return (
         <form onSubmit={handleSubmit}>
             <Container>
@@ -14,7 +21,11 @@ const ProfileForm = ({handleSubmit}) => {
                     <Col xs="12" md="5">
                         <FlexBlock direction="column" justify="start" align="center"> 
                             <img src="/images/avatar.png" alt="avatar" />
-                            <Button color="primary" type="button" >Загрузить фото</Button>
+                            <FileInput
+                                id="avatar-file-input"
+                                downloadComponent={() => (<Button color="primary" type="button" ><DownloadIcon />Загрузить фото</Button>)}
+                                onChange={onUpdateAvatarCurrentUser} 
+                            />
                         </FlexBlock>
                     </Col>
                     <Col xs="12" md="7">

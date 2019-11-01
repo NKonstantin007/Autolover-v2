@@ -2,6 +2,7 @@ import express from 'express';
 import {Express} from "express";
 import bodyParser from 'body-parser';
 import mongoose from 'mongoose';
+import path from 'path';
 
 import config from './config';
 import AppController from './controllers/AppController';
@@ -23,8 +24,8 @@ export default class App {
     private appController: AppController;
 
     /**
-     * Return App instance
      * Create App instance if it does not exist yet
+     * @return {App} App instance
      */
     public static getInstance(): App {
         if(!App.instance) {
@@ -48,6 +49,10 @@ export default class App {
         // oportunity to get body of request as json type
         this.expApp.use(bodyParser.urlencoded({extended: false}));
         this.expApp.use(bodyParser.json());
+
+        //set static folder
+        const folder = config.staticFolder;
+        this.expApp.use(`/${folder}`, express.static(path.join(__dirname, folder)));
 
         // API routing
         this.appController.init();

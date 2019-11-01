@@ -16,6 +16,10 @@ export const updateCurrentUserRequest = createAction('UPDATE_CURRENT_USER_REQUES
 export const updateCurrentUserSuccess = createAction('UPDATE_CURRENT_USER_SUCCESS');
 export const updateCurrentUserFailure = createAction('UPDATE_CURRENT_USER_FAILURE');
 
+export const updateAvatarCurrentUserRequest = createAction('UPDATE_AVATAR_CURRENT_USER_REQUEST');
+export const updateAvatarCurrentUserSuccess = createAction('UPDATE_AVATAR_CURRENT_USER_SUCCESS');
+export const updateAvatarCurrentUserFailure = createAction('UPDATE_AVATAR_CURRENT_USER_FAILURE');
+
 export const fetchCurrentUser = () => async (dispatch) => {
     try {
         dispatch(fetchCurrentUserRequest());
@@ -62,5 +66,18 @@ export const updateCurrentUser = (user) => async (dispatch) => {
         showResponseError(err);
         console.log(err);
         dispatch(updateCurrentUserFailure(err));
+    }
+}
+
+export const updateAvatarCurrentUser = (avatar) => async (dispatch) => {
+    try {
+        dispatch(updateAvatarCurrentUserRequest(avatar));
+        const response = await userApi.updateAvatarCurrentUser(avatar);
+        dispatch(updateAvatarCurrentUserSuccess(response.data));
+    }
+    catch(err) {
+        showResponseError(err);
+        console.log(err);
+        dispatch(updateAvatarCurrentUserFailure(err));
     }
 }

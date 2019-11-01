@@ -3,11 +3,13 @@ import IPathRoute from '../interfaces/IPathRoute';
 import isAuth from '../middlewares/isAuth';
 import AuthController from './AuthController';
 import UserController from './UserController';
+import FileController from './FileController';
 
 class AppController extends BaseController {
     private routeList: IPathRoute[] = [
         {path: '/auth', controller: AuthController},
-        {path: '/user', controller: UserController}
+        {path: '/user', controller: UserController},
+        {path: '/file', controller: FileController}
     ];
     
     public init() {

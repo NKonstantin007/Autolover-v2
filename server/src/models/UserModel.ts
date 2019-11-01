@@ -1,7 +1,9 @@
 import mongoose from 'mongoose'
-import {prop, Typegoose} from '@typegoose/typegoose';
+import {prop, Typegoose, Ref} from '@typegoose/typegoose';
 
-class User extends Typegoose {
+import {File} from './FileModel';
+ 
+export class User extends Typegoose {
     public _id: mongoose.Types.ObjectId;
 
     @prop({required: true})
@@ -15,6 +17,9 @@ class User extends Typegoose {
 
     @prop({default: ''})
     public aboutMe: string;
+
+    @prop({ ref: File, default: null })
+    public avatar: Ref<File>;
 }
 
 const UserModel = new User().getModelForClass(User);
