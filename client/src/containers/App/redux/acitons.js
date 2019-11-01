@@ -12,9 +12,9 @@ export const signOutCurrentUserRequest = createAction('SIGN_OUT_CURRENT_USER_REQ
 export const signOutCurrentUserSuccess = createAction('SIGN_OUT_CURRENT_USER_SUCCESS');
 export const signOutCurrentUserFailure = createAction('SIGN_OUT_CURRENT_USER_FAILURE');
 
-export const updateCurrentUserRequest = createAction('UPDATE_CURRENT_USER_REQUEST');
-export const updateCurrentUserSuccess = createAction('UPDATE_CURRENT_USER_SUCCESS');
-export const updateCurrentUserFailure = createAction('UPDATE_CURRENT_USER_FAILURE');
+export const updateCurrentUserInfoRequest = createAction('UPDATE_CURRENT_USER_REQUEST');
+export const updateCurrentUserInfoSuccess = createAction('UPDATE_CURRENT_USER_SUCCESS');
+export const updateCurrentUserInfoFailure = createAction('UPDATE_CURRENT_USER_FAILURE');
 
 export const updateAvatarCurrentUserRequest = createAction('UPDATE_AVATAR_CURRENT_USER_REQUEST');
 export const updateAvatarCurrentUserSuccess = createAction('UPDATE_AVATAR_CURRENT_USER_SUCCESS');
@@ -55,17 +55,20 @@ export const signOutCurrentUser = (history) => async (dispatch) => {
         dispatch(signOutCurrentUserFailure(err));
     }
 }
-
-export const updateCurrentUser = (user) => async (dispatch) => {
+/**
+ * Update user properties name and aboutMe
+ * @param {{name, aboutMe}} info 
+ */
+export const updateCurrentUserInfo = (info) => async (dispatch) => {
     try {
-        dispatch(updateCurrentUserRequest());
-        const response = await userApi.updateCurrentUser(user);
-        dispatch(updateCurrentUserSuccess(response.data));
+        dispatch(updateCurrentUserInfoRequest());
+        const response = await userApi.updateCurrentUserInfo(info);
+        dispatch(updateCurrentUserInfoSuccess(response.data));
     }
     catch(err) {
         showResponseError(err);
         console.log(err);
-        dispatch(updateCurrentUserFailure(err));
+        dispatch(updateCurrentUserInfoFailure(err));
     }
 }
 

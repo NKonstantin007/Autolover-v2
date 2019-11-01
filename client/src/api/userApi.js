@@ -7,6 +7,6 @@ import axiosWithAuth from './axiosWithAuth';
 export default {
     getCurrent: axiosWithAuth(() => get(`${baseUrl}/auth/current`)),
     signOutCurrentUser: () => get(`${baseUrl}/auth/signout`),
-    updateCurrentUser: axiosWithAuth((user) => put(`${baseUrl}/user/all`, user)),
+    updateCurrentUserInfo: axiosWithAuth((user) => put(`${baseUrl}/user/info`, user)),
     updateAvatarCurrentUser: axiosWithAuth((avatar) => post(`${baseUrl}/user/avatar`, avatar)), 
 };

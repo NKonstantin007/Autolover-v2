@@ -9,9 +9,10 @@ class UserController extends BaseController {
 
     public init() {
         this.router.put(
-            '/all',
+            '/info',
+            AttachCurrentUser,
             isAuth,
-            this.updateUser
+            this.updateUserInfo
         );
 
         this.router.post(
@@ -22,13 +23,12 @@ class UserController extends BaseController {
         );
     }
 
-    private async updateUser(req: Request, res: Response, next: NextFunction): Promise<Response | void> {
-        const { _id, name, email, aboutMe} = req.body;
+    private async updateUserInfo(req: Request, res: Response, next: NextFunction): Promise<Response | void> {
+        const userId = req.user._id;
+        const info = req.body;
         try {
-            const updatedUser = await UserModel
-                .findByIdAndUpdate(_id, {name, email, aboutMe}, { new: true })
-                .select({password: 0});
-            res.status(200).json(updatedUser);
+            await UserModel.findByIdAndUpdate(userId, info);
+            res.status(200).json(info);
         }
         catch(err) {
             console.log(err);

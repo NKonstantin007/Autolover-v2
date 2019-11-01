@@ -7,9 +7,9 @@ import {
     signOutCurrentUserRequest,
     signOutCurrentUserSuccess,
     signOutCurrentUserFailure,
-    updateCurrentUserRequest,
-    updateCurrentUserSuccess,
-    updateCurrentUserFailure,
+    updateCurrentUserInfoRequest,
+    updateCurrentUserInfoSuccess,
+    updateCurrentUserInfoFailure,
     updateAvatarCurrentUserRequest,
     updateAvatarCurrentUserSuccess,
     updateAvatarCurrentUserFailure
@@ -70,21 +70,24 @@ export default handleActions({
             isFetching: false,
         };
     },
-    [updateCurrentUserRequest]: (state) => {
+    [updateCurrentUserInfoRequest]: (state) => {
         return {
             ...state,
             isFetching: true,
             error: null
         };
     },
-    [updateCurrentUserSuccess]: (state, {payload}) => {
+    [updateCurrentUserInfoSuccess]: (state, {payload}) => {
         return {
             ...state,
             isFetching: false,
-            user: payload,
+            user: {
+                ...state.user,
+                ...payload
+            },
         };
     },
-    [updateCurrentUserFailure]: errorActionHandler,
+    [updateCurrentUserInfoFailure]: errorActionHandler,
     [updateAvatarCurrentUserRequest]: (state) => {
         return {
             ...state,
