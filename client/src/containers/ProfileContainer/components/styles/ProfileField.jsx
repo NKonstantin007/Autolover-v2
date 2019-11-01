@@ -23,10 +23,4 @@ export const LabelValue = styled.div`
 
 export const EditButton = styled(Button)`
     padding: 4px;
-    
-    &:hover {
-        svg path {
-            fill: ${MainTextColor};
-        }
-    }
 `;
