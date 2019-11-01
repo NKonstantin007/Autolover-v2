@@ -9,10 +9,9 @@ import getTokenFromHeader from '../utils/getTokenFromHeader';
 class AuthService {
 
     private static generateToken(user) {
-        const {_id, name, email} = user;
+        const {_id, email} = user;
         const data = {
             _id, 
-            name,
             email
         };
         return jwt.sign({data}, config.jwt.secret, {expiresIn: config.jwt.expiresIn});

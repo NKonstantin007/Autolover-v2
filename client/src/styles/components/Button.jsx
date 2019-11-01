@@ -55,6 +55,15 @@ const Button = styled.button`
         }};
         border: none;
         cursor: pointer;
+
+        svg path {
+            fill: ${(props) => {
+                if(props.color === 'accent') return PrimaryLightColor;
+                if(props.color === 'primary') return MainTextColor;
+        
+                return PrimaryColor;
+            }};
+        }
     }
 
     &:disabled {

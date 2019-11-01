@@ -72,6 +72,10 @@ const GlobalStyles = injectGlobal`
         text-decoration: none;
     }
 
+    svg path {
+        transition: 0.3s ease;
+    }
+
 `;
 
 export default GlobalStyles;
