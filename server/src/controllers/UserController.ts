@@ -3,7 +3,9 @@ import {Request, Response, NextFunction} from 'express'
 import BaseController from './BaseController';
 import UserModel, { User } from '../models/UserModel';
 import isAuth from '../middlewares/isAuth';
+import SyncValidate from '../middlewares/SyncValidate';
 import AttachCurrentUser from '../middlewares/AttachCurrentUser';
+import {UserInfoValidators} from '../validations/UserValidations';
 
 class UserController extends BaseController {
 
@@ -12,6 +14,7 @@ class UserController extends BaseController {
             '/info',
             AttachCurrentUser,
             isAuth,
+            SyncValidate(UserInfoValidators),
             this.updateUserInfo
         );
 
