@@ -12,6 +12,29 @@ import FileInput from '../../../components/formElements/FileInput';
 import {StyledAvatar} from './styles/ProfileForm';
 import Image from '../../../components/Image';
 
+const validate = (values) => {
+    const charactersPattern = /[^0-9a-z_-]/i;   // RegExp to validate the input of valid characters
+    const errors = {}
+    //--- Name check ---
+    // check name for emptiness
+    if (!values.name) {
+        errors.name = 'Введите имя';
+    }
+    // check name for emptiness with space
+    else if (values.name.trim() === '') {
+        errors.name = 'Введите имя';
+    }
+    // check name max length 
+    else if (values.name.length > 20) {
+    errors.name = 'Длина имени должна быть не более 20 символов';
+    }
+    // check name for compliance with the pattern
+    else if(charactersPattern.test(values.name.trim())) {
+        errors.name='Имя содержит недопустимые символы';
+    }
+    return errors;
+}
+
 
 let ProfileForm = (props) => {
     const {
@@ -48,7 +71,8 @@ let ProfileForm = (props) => {
 }
 
 ProfileForm =  reduxForm({
-    form: 'ProfileForm'
+    form: 'ProfileForm',
+    validate
 })(ProfileForm);
 
 const selector = formValueSelector('ProfileForm');
