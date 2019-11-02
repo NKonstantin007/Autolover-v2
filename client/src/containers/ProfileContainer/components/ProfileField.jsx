@@ -16,14 +16,14 @@ class ProfileField extends Component {
     changeIsEdit = () => this.setState({isEdit: !this.state.isEdit});
 
     render() {
-        const {input, meta, type, labelKey} = this.props;
+        const {input, meta, type, labelKey, readonly} = this.props;
         return (
             <ProfileFieldWrapper>
                 <FlexBlock direction="row" justify="start" align="baseline"> 
                     <LabelKey>{labelKey}:</LabelKey>
                     { !this.state.isEdit && (<LabelValue>{input.value}</LabelValue>) }
                     { 
-                        this.state.isEdit &&  (
+                        (this.state.isEdit && !readonly) &&  (
                             <Input input={input}  type={type} 
                                 meta={meta} fontSize="big"
                                 onBlurHandler={this.changeIsEdit}
@@ -31,7 +31,7 @@ class ProfileField extends Component {
                         ) 
                     }
                     {
-                        !this.state.isEdit && (
+                        (!this.state.isEdit && !readonly) && (
                             <EditButton 
                                 color="primary" type="button" 
                                 onClick={this.changeIsEdit}

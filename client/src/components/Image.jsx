@@ -1,6 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
+import FilePropTypes from '../prop-types/FileProps';
+
 const Image = (props) => {
     const { src, defaultSrc} = props;
 
@@ -12,7 +14,7 @@ const Image = (props) => {
 }
 
 Image.propTypes = {
-    src: PropTypes.string,
+    src: FilePropTypes,
     defaultSrc: PropTypes.string
 }
 

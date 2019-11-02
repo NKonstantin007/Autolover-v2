@@ -37,8 +37,8 @@ let ProfileForm = (props) => {
                     </Col>
                     <Col xs="12" md="7">
                         <Field name="name" type="text" component={ProfileField} labelKey="Имя"/>
-                        <Field name="email" type="text" component={ProfileField} labelKey="Email"/>
                         <Field name="aboutMe" type="text" component={ProfileField} labelKey="О себе"/>
+                        <Field name="email" type="text" component={ProfileField} labelKey="Email" readonly/>
                         <Button color="primary" type="submit" >Сохранить</Button>
                     </Col>
                 </Row>
