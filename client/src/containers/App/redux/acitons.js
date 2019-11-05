@@ -20,6 +20,10 @@ export const updateAvatarCurrentUserRequest = createAction('UPDATE_AVATAR_CURREN
 export const updateAvatarCurrentUserSuccess = createAction('UPDATE_AVATAR_CURRENT_USER_SUCCESS');
 export const updateAvatarCurrentUserFailure = createAction('UPDATE_AVATAR_CURRENT_USER_FAILURE');
 
+export const updatePasswordCurrentUserRequest = createAction('UPDATE_PASSWORD_CURRENT_USER_REQUEST');
+export const updatePasswordCurrentUserSuccess = createAction('UPDATE_PASSWORD_CURRENT_USER_SUCCESS');
+export const updatePasswordCurrentUserFailure = createAction('UPDATE_PASSWORD_CURRENT_USER_FAILURE');
+
 export const fetchCurrentUser = () => async (dispatch) => {
     try {
         dispatch(fetchCurrentUserRequest());
@@ -74,7 +78,7 @@ export const updateCurrentUserInfo = (info) => async (dispatch) => {
 
 export const updateAvatarCurrentUser = (avatar) => async (dispatch) => {
     try {
-        dispatch(updateAvatarCurrentUserRequest(avatar));
+        dispatch(updateAvatarCurrentUserRequest());
         const response = await userApi.updateAvatarCurrentUser(avatar);
         dispatch(updateAvatarCurrentUserSuccess(response.data));
     }
@@ -82,5 +86,19 @@ export const updateAvatarCurrentUser = (avatar) => async (dispatch) => {
         showResponseError(err);
         console.log(err);
         dispatch(updateAvatarCurrentUserFailure(err));
+    }
+}
+
+export const updatePasswordCurrentUser = (passwordObj) => async (dispatch) => {
+    try {
+        dispatch(updatePasswordCurrentUserRequest());
+        await userApi.updatePasswordCurrentUser(passwordObj);
+        dispatch(updatePasswordCurrentUserSuccess());
+        Alert.success('Пароль успешно изменен');
+    }
+    catch(err) {
+        showResponseError(err);
+        console.log(err);
+        dispatch(updatePasswordCurrentUserFailure(err));
     }
 }

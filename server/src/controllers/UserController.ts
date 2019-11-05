@@ -6,6 +6,7 @@ import isAuth from '../middlewares/isAuth';
 import SyncValidate from '../middlewares/SyncValidate';
 import AttachCurrentUser from '../middlewares/AttachCurrentUser';
 import {UserInfoValidators} from '../validations/UserValidations';
+import UserService from '../services/UserService';
 
 class UserController extends BaseController {
 
@@ -24,6 +25,13 @@ class UserController extends BaseController {
             AttachCurrentUser,
             this.updateAvatarUser
         );
+
+        this.router.put(
+            '/password',
+            isAuth,
+            AttachCurrentUser,
+            this.updatePasswordUser
+        )
     }
 
     private async updateUserInfo(req: Request, res: Response, next: NextFunction): Promise<Response | void> {
@@ -45,6 +53,18 @@ class UserController extends BaseController {
         try {
             await UserModel.findByIdAndUpdate(userId, {avatar});
             res.status(200).json(avatar);
+        }
+        catch(err) {
+            console.log(err);
+            return next(err);
+        }
+    }
+
+    private async updatePasswordUser(req: Request, res: Response, next: NextFunction): Promise<Response | void> {
+        const passwordObj = req.body;
+         try {
+            await UserService.updatePassword(req.user, passwordObj.newPassword)
+            res.sendStatus(200);
         }
         catch(err) {
             console.log(err);

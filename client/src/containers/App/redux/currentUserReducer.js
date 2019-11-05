@@ -12,7 +12,10 @@ import {
     updateCurrentUserInfoFailure,
     updateAvatarCurrentUserRequest,
     updateAvatarCurrentUserSuccess,
-    updateAvatarCurrentUserFailure
+    updateAvatarCurrentUserFailure,
+    updatePasswordCurrentUserRequest,
+    updatePasswordCurrentUserSuccess,
+    updatePasswordCurrentUserFailure
 } from './acitons';
 
 const defaultState = {
@@ -103,7 +106,21 @@ export default handleActions({
                 ...state.user,
                 avatar: payload
             }
+        };
+    },
+    [updateAvatarCurrentUserFailure]: errorActionHandler,
+    [updatePasswordCurrentUserRequest]: (state) => {
+        return {
+            ...state,
+            isFetching: true,
+            error: null
+        };
+    },
+    [updatePasswordCurrentUserSuccess]: (state) => {
+        return {
+            ...state,
+            isFetching: false
         }
     },
-    [updateAvatarCurrentUserFailure]: errorActionHandler
+    [updatePasswordCurrentUserFailure]: errorActionHandler,
 }, defaultState);

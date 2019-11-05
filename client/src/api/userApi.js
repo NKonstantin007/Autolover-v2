@@ -9,4 +9,5 @@ export default {
     signOutCurrentUser: () => get(`${baseUrl}/auth/signout`),
     updateCurrentUserInfo: axiosWithAuth((user) => put(`${baseUrl}/user/info`, user)),
     updateAvatarCurrentUser: axiosWithAuth((avatar) => post(`${baseUrl}/user/avatar`, avatar)), 
+    updatePasswordCurrentUser: axiosWithAuth((passwordsObj) => put(`${baseUrl}/user/password`, passwordsObj))
 };

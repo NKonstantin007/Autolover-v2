@@ -9,8 +9,9 @@ import Button from '../../../styles/components/Button';
 import FlexBlock from '../../../styles/components/FlexBlock';
 import {DownloadIcon} from '../../../styles/icons';
 import FileInput from '../../../components/formElements/FileInput';
-import {StyledAvatar} from './styles/ProfileForm';
+import {StyledAvatar, ButtonSection} from './styles/ProfileForm';
 import Image from '../../../components/Image';
+import {PencilIcon} from '../../../styles/icons';
 
 const validate = (values) => {
     const charactersPattern = /[^0-9a-z_-]/i;   // RegExp to validate the input of valid characters
@@ -40,6 +41,7 @@ let ProfileForm = (props) => {
     const {
         handleSubmit,
         onUpdateAvatarCurrentUser,
+        onUpdatePasswordCurrentUser,
         avatar
     } = props;
     return (
@@ -61,8 +63,15 @@ let ProfileForm = (props) => {
                     <Col xs="12" md="7">
                         <Field name="name" type="text" component={ProfileField} labelKey="Имя"/>
                         <Field name="aboutMe" type="text" component={ProfileField} labelKey="О себе"/>
-                        <Field name="email" type="text" component={ProfileField} labelKey="Email" readonly/>
-                        <Button color="primary" type="submit" >Сохранить</Button>
+                        <Field name="email" type="text" component={ProfileField} labelKey="Email" readonly />
+                        <ButtonSection>
+                            <Button color="primary" type="submit">Сохранить</Button>
+                            <Button 
+                                color="primary" type="button" onClick={onUpdatePasswordCurrentUser}
+                            >
+                                <PencilIcon />Изменить пароль
+                            </Button>
+                        </ButtonSection>
                     </Col>
                 </Row>
             </Container>

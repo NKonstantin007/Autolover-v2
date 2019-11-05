@@ -6,7 +6,6 @@ import mongoose from 'mongoose';
 
 import config from './../config';
 import FileModel, {File} from '../models/FileModel';
-import { Mongoose } from 'mongoose';
 
 
 class FileService {

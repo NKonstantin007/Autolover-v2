@@ -6,13 +6,16 @@ import {
     PrimaryColor,
     PrimaryLightColor,
     PurpleColor,
-    MainTextColor
+    MainTextColor,
+    RedColor,
+    RedDarkColor
 } from '../colors';
 
 const Button = styled.button`
     padding: 8px 10px;
     background: ${(props) => {
         if(props.color === 'primary') return `radial-gradient(${PrimaryLightColor}, ${PrimaryColor})`;
+        if(props.color === 'danger') return `radial-gradient(${RedColor}, ${RedDarkColor})`
         if(props.color === 'accent') return `radial-gradient(${PurpleColor}, ${AccentColor})`;
 
         return `radial-gradient(${PurpleColor}, ${AccentColor})`;
@@ -24,7 +27,7 @@ const Button = styled.button`
     }};
     border-style: solid;
     border-color: ${(props) => {
-        if(props.color === 'primary') return 'transparent';
+        if(props.color === 'primary' || props.color === 'danger') return 'transparent';
         if(props.color === 'accent') return PrimaryColor;
 
         return PrimaryColor;
@@ -44,14 +47,15 @@ const Button = styled.button`
         background: ${(props) => {
             if(props.color === 'accent') return AccentColor;
             if(props.color === 'primary') return PrimaryColor;
+            if(props.color === 'danger') return RedDarkColor;
     
             return PrimaryColor;
         }};
         color: ${(props) => {
             if(props.color === 'accent') return PrimaryLightColor;
-            if(props.color === 'primary') return MainTextColor;
+            if(props.color === 'primary' || props.color === 'danger') return MainTextColor;
     
-            return PrimaryColor;
+            return PrimaryLightColor;
         }};
         border: none;
         cursor: pointer;
@@ -59,7 +63,7 @@ const Button = styled.button`
         svg path {
             fill: ${(props) => {
                 if(props.color === 'accent') return PrimaryLightColor;
-                if(props.color === 'primary') return MainTextColor;
+                if(props.color === 'primary' || props.color === 'danger') return MainTextColor;
         
                 return PrimaryColor;
             }};

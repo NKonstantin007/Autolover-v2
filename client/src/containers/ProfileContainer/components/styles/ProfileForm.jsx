@@ -8,3 +8,10 @@ export const StyledAvatar = styled.div`
         max-height: 300px;
     }
 `;
+
+export const ButtonSection = styled.div`
+    & button {
+        margin-bottom: 0.5rem;
+        display: block;
+    }
+`;

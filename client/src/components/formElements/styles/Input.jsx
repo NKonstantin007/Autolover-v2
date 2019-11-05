@@ -2,7 +2,8 @@ import styled from '@emotion/styled';
 import {
   MainTextColor,
   GrayDarkColor,
-  ErrorColor,
+  RedColor,
+  RedDarkColor,
   PrimaryLightColor
 } from '../../../styles/colors';
 
@@ -13,7 +14,7 @@ const StyledInput = styled.div`
   & input {
     border-width: 0;
     border-bottom-color:${(props => {
-      if(props.touched && props.error) return ErrorColor;
+      if(props.touched && props.error) return RedColor;
       if(props.touched && !props.error) return PrimaryLightColor;
       return GrayDarkColor;
     })};
@@ -35,7 +36,7 @@ const StyledInput = styled.div`
   }
 
   & span {
-    color: ${ErrorColor}
+    color: ${RedDarkColor}
   }
 `;
 
