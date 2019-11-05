@@ -14,7 +14,7 @@ import Spinner from '../../../components/Spinner';
 const validate = (values) => {
     const charactersPattern = /[^0-9a-z_-]/i;   // RegExp to validate the input of valid characters
     const emailPattern = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i // RegExp to validate email
-    const errors = {}
+    const errors = {};
     //--- Name check ---
     // check name for emptiness
     if (!values.name) {
