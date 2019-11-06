@@ -5,7 +5,7 @@ import UserModel, { User } from '../models/UserModel';
 import isAuth from '../middlewares/isAuth';
 import SyncValidate from '../middlewares/SyncValidate';
 import AttachCurrentUser from '../middlewares/AttachCurrentUser';
-import {UserInfoValidators} from '../validations/UserValidations';
+import {UserInfoValidators, UserUpdatePasswordValidators} from '../validations/UserValidations';
 import UserService from '../services/UserService';
 
 class UserController extends BaseController {
@@ -13,8 +13,8 @@ class UserController extends BaseController {
     public init() {
         this.router.put(
             '/info',
-            AttachCurrentUser,
             isAuth,
+            AttachCurrentUser,
             SyncValidate(UserInfoValidators),
             this.updateUserInfo
         );
@@ -30,6 +30,7 @@ class UserController extends BaseController {
             '/password',
             isAuth,
             AttachCurrentUser,
+            SyncValidate(UserUpdatePasswordValidators),
             this.updatePasswordUser
         )
     }
