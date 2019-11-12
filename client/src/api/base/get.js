@@ -1,3 +1,5 @@
-import axios from './axios';
+import axios from 'axios';
 
-export default (url) => axios.get(url);
+import {getDefaultParams} from './base';
+
+export default (url, params = {...getDefaultParams()}) => axios.get(url, params);

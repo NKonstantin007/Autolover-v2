@@ -1,4 +1,4 @@
-import {baseUrl} from './base/axios';
+import {baseUrl} from './base/base';
 import post from './base/post';
 import axiosWithAuth from './axiosWithAuth';
 

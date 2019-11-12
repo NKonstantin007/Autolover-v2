@@ -1,8 +1,6 @@
-import axios from 'axios';
-
 export const baseUrl = '/api';
 
-export default axios.create({
+export const getDefaultParams = () =>  ({
     headers: {
         Authorization: `Bearer ${localStorage.getItem('autoloverToken')}`
     }

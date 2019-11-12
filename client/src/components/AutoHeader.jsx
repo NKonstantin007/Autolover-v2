@@ -77,7 +77,7 @@ const AutoHeader = (props) => {
                 {
                     isAuth && (
                         <StyledProfile to="/profile">
-                            <img src="/images/avatar.png" alt="avatar"></img>
+                            <img src={user.avatar ? `/images/${user.avatar._id}` : '/images/avatar.png'} alt="avatar" />
                             <span>{user.name}</span>
                         </StyledProfile>
                     )

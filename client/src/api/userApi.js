@@ -1,4 +1,4 @@
-import {baseUrl} from './base/axios';
+import {baseUrl} from './base/base';
 import get from './base/get';
 import put from './base/put';
 import post from './base/post';
