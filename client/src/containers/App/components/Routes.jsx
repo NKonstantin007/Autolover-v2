@@ -7,6 +7,7 @@ import SignUpContainer from '../../SignUpContainer';
 import SignInContainer from '../../SignInContainer';
 import ProfileContainer from '../../ProfileContainer';
 import AllAboutCarContainer from '../../AllAboutCarContainer';
+import PageNotFound from '../../../components/PageNotFound';
 
 import PrivateRoute from '../../../components/PrivateRoute';
  
@@ -18,6 +19,7 @@ const Routes = () => {
             <Route path="/signin" component={SignInContainer} />
             <Route path="/profile" component={ProfileContainer} />
             <PrivateRoute path="/allcars" component={AllAboutCarContainer} />
+            <Route component={PageNotFound} />
         </Switch>
     );
 }
