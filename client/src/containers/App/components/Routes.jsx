@@ -6,6 +6,9 @@ import HomeContainer from '../../HomeContainer';
 import SignUpContainer from '../../SignUpContainer';
 import SignInContainer from '../../SignInContainer';
 import ProfileContainer from '../../ProfileContainer';
+import AllAboutCarContainer from '../../AllAboutCarContainer';
+
+import PrivateRoute from '../../../components/PrivateRoute';
  
 const Routes = () => {
     return (
@@ -14,6 +17,7 @@ const Routes = () => {
             <Route path="/signup" component={SignUpContainer} />
             <Route path="/signin" component={SignInContainer} />
             <Route path="/profile" component={ProfileContainer} />
+            <PrivateRoute path="/allcars" component={AllAboutCarContainer} />
         </Switch>
     );
 }
