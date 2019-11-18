@@ -5,7 +5,7 @@ Users will be able to read articles about cars, find out the latest news and lea
 
 ## Getting started ##
 
-The project was created using the JavaScript framework React and its interaction with Redux on the client side and JavaScript runtime environment Node.js on the server side. The project uses an individual design with minimal implementation of template engines.
+The project was created using the JavaScript library React and its interaction with Redux on the client side and JavaScript runtime environment Node.js on the server side. The project uses an individual design with minimal implementation of template engines.
 
 ### Software ###
 What software you need to install and how to install them?
