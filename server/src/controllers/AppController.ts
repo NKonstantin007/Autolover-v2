@@ -7,9 +7,9 @@ import FileController from './FileController';
 
 class AppController extends BaseController {
     private routeList: IPathRoute[] = [
-        {path: '/auth', controller: AuthController},
-        {path: '/user', controller: UserController},
-        {path: '/file', controller: FileController}
+        {path: '/auth', controller: new AuthController()},
+        {path: '/user', controller: new UserController()},
+        {path: '/file', controller: new FileController()}
     ];
     
     public init() {
@@ -17,8 +17,7 @@ class AppController extends BaseController {
             res.json({api: "test"});
         });
 
-        for(const {path, controller: Controller} of this.routeList) {
-            const controller: BaseController = new Controller();
+        for(const {path, controller} of this.routeList) {
             controller.init();
             this.router.use(`${path}`, controller.getRouter());
         }

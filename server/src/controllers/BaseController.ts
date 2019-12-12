@@ -13,7 +13,7 @@ abstract class BaseController {
 
     public abstract init();
 
-    public getRouter() {
+    public getRouter(): Router {
         return this.router;
     }
 }

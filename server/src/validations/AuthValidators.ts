@@ -48,7 +48,7 @@ export const SignInValidators = [
             try {
                 const user = await UserModel.findOne({email: value});
                 if(!user) {
-                    return Promise.reject('Пользователя с таким email не существует');
+                    return Promise.reject('Неверный логин или пароль');
                 }
             }
             catch(err) {
@@ -63,7 +63,7 @@ export const SignInValidators = [
             const user = await UserModel.findOne({email: req.body.email});
             const isValidPassword = await bcrypt.compare(value, user.password);
             if(!isValidPassword) {
-                return Promise.reject('Неверный пароль');
+                return Promise.reject('Неверный логин пароль');
             }
         })
 ]

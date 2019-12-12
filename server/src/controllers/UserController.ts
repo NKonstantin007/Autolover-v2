@@ -35,7 +35,7 @@ class UserController extends BaseController {
         )
     }
 
-    private async updateUserInfo(req: Request, res: Response, next: NextFunction): Promise<Response | void> {
+    private async updateUserInfo(req: Request, res: Response, next: NextFunction): Promise<void> {
         const userId = req.user._id;
         const info = req.body;
         try {
@@ -48,7 +48,7 @@ class UserController extends BaseController {
         }
     }
 
-    private async updateAvatarUser(req: Request, res: Response, next: NextFunction): Promise<Response | void> {
+    private async updateAvatarUser(req: Request, res: Response, next: NextFunction): Promise<void> {
         const userId = req.user._id;
         const avatar = req.body;
         try {
@@ -61,7 +61,7 @@ class UserController extends BaseController {
         }
     }
 
-    private async updatePasswordUser(req: Request, res: Response, next: NextFunction): Promise<Response | void> {
+    private async updatePasswordUser(req: Request, res: Response, next: NextFunction): Promise<void> {
         const passwordObj = req.body;
          try {
             await UserService.updatePassword(req.user, passwordObj.newPassword)

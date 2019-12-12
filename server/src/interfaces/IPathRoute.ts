@@ -4,7 +4,7 @@ import BaseController from '../controllers/BaseController';
  */
 interface IPathRoute {
     path: string,
-    controller
+    controller: BaseController
 }
 
 export default IPathRoute;

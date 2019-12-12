@@ -8,7 +8,7 @@ import getTokenFromHeader from '../utils/getTokenFromHeader';
 
 class AuthService {
 
-    private static generateToken(user) {
+    private static generateToken(user): string {
         const {_id, email} = user;
         const data = {
             _id, 
@@ -17,7 +17,7 @@ class AuthService {
         return jwt.sign({data}, config.jwt.secret, {expiresIn: config.jwt.expiresIn});
     }
 
-    public static async signUp(user): Promise<any> {
+    public static async signUp(user): Promise<object> {
         const {name, email, password} = user;
         const hashedPassword = await bcrypt.hash(password, 10);
         const userRecord = await UserModel.create({
@@ -43,7 +43,7 @@ class AuthService {
         };
     }
 
-    public static async refreshToken(token): Promise<any> {
+    public static async refreshToken(token): Promise<string | boolean> {
         try{
             const decoded = jwt.verify(token, config.jwt.secret);
             return AuthService.generateToken(decoded.data);

@@ -26,13 +26,26 @@ class FileController extends BaseController {
             if (!allowedMimetypes.includes(mimetype)) {
                 return res.status(422).send('Invalid image format');
             }
-            // create file
-            fileId =  await FileService.createFile(file, filename);
+
+            try {
+                // create file
+                fileId =  await FileService.createFile(file, filename);
+            }
+            catch(err) {
+                console.log(err);
+                return next(err);
+            }
         });
 
         busboy.on('finish', async () => {
-            const file = await FileService.getFile(fileId);
-            return res.status(200).json(file);
+            try {
+                const file = await FileService.getFile(fileId);
+                return res.status(200).json(file);
+            }
+            catch(err) {
+                console.log(err);
+                return next(err);
+            }
         });
 
         req.pipe(busboy);
