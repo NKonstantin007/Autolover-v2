@@ -24,21 +24,24 @@ export const updatePasswordCurrentUserRequest = createAction('UPDATE_PASSWORD_CU
 export const updatePasswordCurrentUserSuccess = createAction('UPDATE_PASSWORD_CURRENT_USER_SUCCESS');
 export const updatePasswordCurrentUserFailure = createAction('UPDATE_PASSWORD_CURRENT_USER_FAILURE');
 
-export const fetchCurrentUser = () => async (dispatch) => {
+export const fetchCurrentUser = (history) => async (dispatch) => {
     try {
         dispatch(fetchCurrentUserRequest());
         if(localStorage.getItem('autoloverToken')) {
             const response = await userApi.getCurrent();
             const user = response.data;
             dispatch(fetchCurrentUserSuccess(user));
+            history.push('/');
         }
         else {
+            history.push('/signin');
             Alert.warning('Войдите в свой профиль или зарегистрируйтесь!')
             console.log('Токен не активен');
             dispatch(fetchCurrentUserFailure('Войдите в свой профиль или зарегистрируйтесь!'));
         }
     }
     catch(err) {
+        history.push('/signin');
         showResponseError(err);
         console.log(err);
         dispatch(fetchCurrentUserFailure(err));

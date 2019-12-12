@@ -2,14 +2,14 @@ import React from 'react';
 import {Link} from 'react-router-dom';
 
 import { 
-    StyledAutoFooter,
+    StyledFooter,
     QuoteFooter,
     NavFooter 
-} from './styles/AutoFooter';
+} from './styles/Footer';
 
-const AutoFooter = () => {
+const Footer = () => {
     return (
-        <StyledAutoFooter>
+        <StyledFooter>
             <QuoteFooter>На земле, на воде и в небе<br />&copy;Mercedes-Benz</QuoteFooter>
             <NavFooter>
                 <Link to="/">Главная</Link>
@@ -17,8 +17,8 @@ const AutoFooter = () => {
                 <Link to="/facts">Интересные факты</Link>
                 <Link to="/reviews">Обзоры автомобилей</Link>
             </NavFooter>
-        </StyledAutoFooter>
+        </StyledFooter>
     );
 }
 
-export default AutoFooter;
+export default Footer;

@@ -4,9 +4,9 @@ import {
     AccentColor,
     PrimaryLightColor,
     GrayColor
-} from '../../styles/colors';
+} from '../../../../styles/colors';
 
-export const StyledAutoHeader = styled.header`
+export const StyledHeader = styled.header`
     padding-left: 10%;
     padding-right: 10%;
     background: ${AccentColor};

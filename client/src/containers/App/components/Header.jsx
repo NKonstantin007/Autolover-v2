@@ -1,41 +1,38 @@
 import React from 'react';
 import {Link} from 'react-router-dom';
-import {connect} from 'react-redux';
-import {compose} from 'redux';
-import {withRouter} from 'react-router-dom'
+import PropTypes from 'prop-types';
+import {withRouter} from 'react-router-dom';
 
 import {
-    StyledAutoHeader,
+    StyledHeader,
     StyledMenuHeader,
     StyledBrandHeader,
     StyledNavHeader,
     StyledProfile,
     StyledSignInUpButtons,
- } from './styles/AutoHeader';
-import Button from '../styles/components/Button';
-import FlexBlock from '../styles/components/FlexBlock';
-import {signOutCurrentUser} from '../containers/App/redux/acitons';
+ } from './styles/Header';
+import Button from '../.../../../../styles/components/Button';
+import FlexBlock from '../.../../../../styles/components/FlexBlock';
 
 
-const AutoHeader = (props) => {
+const Header = (props) => {
+    const {isAuth, user, handleSignOut, history} = props;
 
-    const {isAuth, history, user, signOutCurrentUser} = props;
-
-    const onSignInOrOutClick = () => {
+    const handleSignInOrOutClick = () => {
         if(isAuth) {
-            signOutCurrentUser(history);
+            handleSignOut(history);
         }
         else {
             history.push('/signin');
         }
     }
 
-    const onSignUpClick = () => {
+    const handleSignUpClick = () => {
         history.push('/signup');
     }
 
     return (
-        <StyledAutoHeader>
+        <StyledHeader>
             <StyledBrandHeader>
                 <h1>
                     <span>
@@ -52,7 +49,7 @@ const AutoHeader = (props) => {
                         <Button 
                             color="accent" 
                             round
-                            onClick={onSignInOrOutClick}
+                            onClick={handleSignInOrOutClick}
                         >
                             { isAuth ? 'Выйти' : 'Войти' }
                         </Button>
@@ -61,7 +58,7 @@ const AutoHeader = (props) => {
                                 <Button 
                                     color="accent" 
                                     round
-                                    onClick={onSignUpClick}
+                                    onClick={handleSignUpClick}
                                 >Регистрация
                                 </Button>
                             )
@@ -83,23 +80,14 @@ const AutoHeader = (props) => {
                     )
                 }
             </StyledMenuHeader>
-        </StyledAutoHeader>
+        </StyledHeader>
     );
 }
 
-const mapStateToProps = (state) => {
-    const {isAuth, user} = state.currentUser;
-    return {
-        isAuth,
-        user: user
-    };
+Header.propTypes = {
+    isAuth: PropTypes.bool.isRequired,
+    handleSignOut: PropTypes.func.isRequired,
+    user: PropTypes.object
 }
 
-const mapDispatchToProps = {
-    signOutCurrentUser
-};
-
-export default compose(
-    withRouter,
-    connect(mapStateToProps, mapDispatchToProps)
-)(AutoHeader);
+export default withRouter(Header);

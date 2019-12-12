@@ -1,8 +1,6 @@
 import React from 'react';
 import {Container, Row, Col} from 'reactstrap';
 import {connect} from 'react-redux';
-import {compose} from 'redux';
-import {withRouter} from 'react-router-dom'
   
 import SignInForm from './components/SignInForm';
 import Slider from '../../components/Slider';
@@ -11,12 +9,9 @@ import Spinner from '../../components/Spinner';
 import {fetchSignIn} from './redux/actions';
 
 const SignInContainer = (props) => {
-
-    const onSignIn = async (user) => {
-        const {history} = props;
+    const handleSignIn = async (user) => {
         try {
-            await props.fetchSignIn(user, history);
-
+            await props.fetchSignIn(user);
         }   
         catch(e) {
             console.log(e);
@@ -35,7 +30,7 @@ const SignInContainer = (props) => {
                             }
                             <SignInTitle>Авторизация</SignInTitle>
                             <SignInText>Войдите используя свой email и пароль</SignInText>
-                            <SignInForm onSubmit={onSignIn} />
+                            <SignInForm onSubmit={handleSignIn} />
                         </Col>
                     </Row>
                 </Container>
@@ -54,7 +49,4 @@ const mapDispatchToProps = {
         fetchSignIn
 };
 
-export default compose(
-    withRouter,
-    connect(mapStateToProps, mapDispatchToProps)
-)(SignInContainer);
+export default connect(mapStateToProps, mapDispatchToProps)(SignInContainer);

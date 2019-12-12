@@ -4,9 +4,7 @@ import {BrowserRouter} from 'react-router-dom';
 import Alert from 'react-s-alert';
 
 import store from './redux/store';
-import Routes from './components/Routes';
-import AutoHeader from '../../components/AutoHeader';
-import AutoFooter from '../../components/AutoFooter';
+import Main from './containers/Main';
 
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'react-s-alert/dist/s-alert-default.css';
@@ -18,9 +16,7 @@ const AppContainer = () => {
         <div>
             <Provider store={store}>
                 <BrowserRouter>
-                    <AutoHeader />
-                    <Routes />
-                    <AutoFooter />
+                    <Main />
                     <Alert 
                         stack={{limit: 5}}
                         effect="bouncyflip"

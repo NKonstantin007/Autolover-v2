@@ -14,8 +14,7 @@ export const fetchSignIn = (user, history) => async (dispatch) => {
         const {data} = await authApi.signIn(user);
         localStorage.setItem('autoloverToken', data.token);
         dispatch(fetchSignInSuccess());
-        dispatch(fetchCurrentUser());
-        history.push('/');
+        dispatch(fetchCurrentUser(history));
     }
     catch(err) {
         showResponseError(err);

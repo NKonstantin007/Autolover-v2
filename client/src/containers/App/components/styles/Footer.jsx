@@ -4,9 +4,9 @@ import {
     AccentColor,
     GrayColor,
     PrimaryLightColor
-} from '../../styles/colors';
+} from '../../../../styles/colors';
 
-export const StyledAutoFooter = styled.div`
+export const StyledFooter = styled.div`
     padding-left: 10%;
     padding-right: 10%;
     padding-top: 10px;
