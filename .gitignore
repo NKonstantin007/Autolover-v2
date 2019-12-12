@@ -2,10 +2,8 @@
 /server/node_modules
 /server/bin
 /server/src/config
-/server/yarn.lock
 /server/yarn-error.log
 #Client
 /client/node_modules
-/client/yarn.lock
 /client/yarn-debug.log*
 /client/yarn-error.log*
