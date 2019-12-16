@@ -83,6 +83,7 @@ const validate = (values) => {
 
 const SignUpForm = (props) => {
     const {handleSubmit, userName, error, isFetching} = props;
+    
     return (
         <SignUpFormWrapper>
             {

@@ -4,19 +4,13 @@ import { Container, Row, Col } from 'reactstrap';
 
 import SignUpAnnouncement from './components/SignUpAnnouncement';
 import Slider from '../../components/Slider';
-import SignUpForm from './components/SignUpForm';
+import SignUpForm from './containers/SignUpForm';
 import {fetchSignUp} from './redux/actions';
 
 
 const SignUpContainer = (props) => {
-
     const onSignUp = async (user) => {
-        try {
-            await props.fetchSignUp(user);
-        }   
-        catch(e) {
-            console.log(e);
-        }
+        await props.fetchSignUp(user);
     }
 
     return (
@@ -39,6 +33,5 @@ const SignUpContainer = (props) => {
 const mapDispatchToProps = {
     fetchSignUp
 }
-
 
 export default connect(null, mapDispatchToProps)(SignUpContainer);

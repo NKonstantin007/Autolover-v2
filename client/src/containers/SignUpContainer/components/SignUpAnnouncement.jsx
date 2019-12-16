@@ -6,6 +6,7 @@ import {
 	AnnouncementList,
 	AnnouncementTitle
 } from './styles/SignUpAnnouncement';
+
 const SignUpAnnouncement = () => {
     return (
         <SignUpAnnouncementWrapper>
