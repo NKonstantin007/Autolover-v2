@@ -2,20 +2,15 @@ import React from 'react';
 import {Container, Row, Col} from 'reactstrap';
 import {connect} from 'react-redux';
   
-import SignInForm from './components/SignInForm';
+import SignInForm from './containers/SignInForm';
 import Slider from '../../components/Slider';
-import {SignInWrapper, SignInText, SignInTitle} from './components/styles';
+import {SignInWrapper, SignInText, SignInTitle} from './style';
 import Spinner from '../../components/Spinner';
 import {fetchSignIn} from './redux/actions';
 
 const SignInContainer = (props) => {
     const handleSignIn = async (user) => {
-        try {
-            await props.fetchSignIn(user);
-        }   
-        catch(e) {
-            console.log(e);
-        }
+        await props.fetchSignIn(user);
     }
 
     return (
@@ -46,7 +41,7 @@ const mapStateToProps = ({signIn}) => {
 }
 
 const mapDispatchToProps = {
-        fetchSignIn
+    fetchSignIn
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(SignInContainer);
