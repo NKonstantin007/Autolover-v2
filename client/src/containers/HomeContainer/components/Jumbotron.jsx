@@ -1,5 +1,5 @@
 import React from 'react';
-import {connect} from 'react-redux';
+import PropTypes from 'prop-types';
 
 import {
     StyledJumbotron,
@@ -8,8 +8,7 @@ import {
     JumbotronSignUpLink
 } from './styles/Jumbotron';
 
-const Jumbotron = (props) => {
-    const isAuth = props.isAuth;
+const Jumbotron = ({isAuth}) => {
     return (
         <StyledJumbotron>
             <JumbotronTitle>Посвящается автомобильной отрасли</JumbotronTitle>
@@ -21,11 +20,8 @@ const Jumbotron = (props) => {
     );
 }
 
-const mapStateToProps = (state) => {
-    const {isAuth} = state.currentUser;
-    return {
-        isAuth
-    };
-}
+Jumbotron.propTypes = {
+    isAuth: PropTypes.bool.isRequired
+};
 
-export default connect(mapStateToProps)(Jumbotron);
+export default Jumbotron;

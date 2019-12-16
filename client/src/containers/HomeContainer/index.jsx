@@ -1,6 +1,7 @@
 import React from 'react';
 import {Link} from 'react-router-dom';
 import {connect} from 'react-redux';
+import PropTypes from 'prop-types';
  
 import {
     CardMenuWrapper,
@@ -10,20 +11,19 @@ import {
     CardMenuImg,
     CardMenuText
 } from './components/styles/CardMenu';
-
 import Jumbotron from './components/Jumbotron';
 import Slider from '../../components/Slider';
 import Spinner from '../../components/Spinner';
 
-const HomeContainer = (props) => {
-    if(props.isFetching) {
+const HomeContainer = ({isFetching, isAuth}) => {
+    if(isFetching) {
         return <Spinner />
     }
 
     return (
         <div>
             <Slider />
-            <Jumbotron />
+            <Jumbotron isAuth={isAuth} />
             <CardMenuWrapper>
                 <div>
                     <CardMenuTitle>Все об автомобилях</CardMenuTitle>
@@ -74,10 +74,16 @@ const HomeContainer = (props) => {
     );
 }
 
+HomeContainer.propTypes = {
+    isFetching: PropTypes.bool.isRequired,
+    isAuth: PropTypes.bool.isRequired
+};
+
 const mapStateToProps = ({currentUser}) => {
-    const {isFetching} = currentUser;
+    const {isFetching, isAuth} = currentUser;
     return {
-        isFetching
+        isFetching,
+        isAuth
     };
 }
 

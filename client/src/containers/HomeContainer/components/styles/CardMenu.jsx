@@ -32,6 +32,7 @@ const rotate = keyframes`
 `;
 
 export const CardMenuItem = styled(Card)`
+    height: 400px;
 
     &:hover {
         animation-name: ${rotate};
