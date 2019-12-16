@@ -1,67 +1,57 @@
-import React, {Component} from 'react';
+import React, {useState} from 'react';
 import {connect} from 'react-redux';
-import {getFormValues} from 'redux-form'; 
 
-import {ProfileWrapper} from './components/styles';
-import ProfileForm from  './components/ProfileForm';
+import {ProfileWrapper} from './style';
+import ProfileForm from  './containers/ProfileForm';
 import Spinner from '../../components/Spinner';
 import ChangePasswordModal from './modals/ChangePasswordModal';
 import {
     updateCurrentUserInfo, updateAvatarCurrentUser, updatePasswordCurrentUser
 } from '../App/redux/acitons';
 
-class ProfileContainer extends Component{
-    state = {
-        isOpenPasswordModal: false
-    };
+function ProfileContainer(props) {
+    const {user, isFetching} = props;
+    
+    const [isOpenPasswordModal, setIsOpenPasswordModal] = useState(false);
 
-    togglePasswordModalHandler = () => {
-        this.setState({
-            isOpenPasswordModal: !this.state.isOpenPasswordModal
-        });
+    const togglePasswordModalHandler = () => {
+        setIsOpenPasswordModal((prevState) => !prevState);
     }
 
-    updateCurrentUserInfoHandler = async (updatedUser) => {
+    const updateCurrentUserInfoHandler = async (updatedUser) => {
         const {name, aboutMe} = updatedUser;
         const info = {name, aboutMe}
-        await this.props.updateCurrentUserInfo(info);
+        await props.updateCurrentUserInfo(info);
     }
 
-    updateAvatarCurrentUserHandler = async (avatar) => {
-        await this.props.updateAvatarCurrentUser(avatar);
+    const updateAvatarCurrentUserHandler = async (avatar) => {
+        await props.updateAvatarCurrentUser(avatar);
     }
 
-    updatePasswordCurrentUserHandler = async () => {
-        const passwordObj = this.props.valuesFromChangePasswordForm;
-        await this.props.updatePasswordCurrentUser(passwordObj);
-        this.togglePasswordModalHandler();
+    const updatePasswordCurrentUserHandler = async (passObj) => {
+        togglePasswordModalHandler();
+        await props.updatePasswordCurrentUser(passObj);
     }
 
-    render() {
-        const {
-            user, isFetching
-        } = this.props;
-    
-        if(isFetching) { 
-            return <Spinner />;
-        }
-        return (
-            <ProfileWrapper>
-                <ProfileForm 
-                    initialValues={user} 
-                    onSubmit={this.updateCurrentUserInfoHandler}
-                    onUpdateAvatarCurrentUser={this.updateAvatarCurrentUserHandler}
-                    onUpdatePasswordCurrentUser={this.togglePasswordModalHandler}
-                />
-                <ChangePasswordModal 
-                    isOpen={this.state.isOpenPasswordModal}
-                    onToggle={this.togglePasswordModalHandler}
-                    onSubmit={this.updatePasswordCurrentUserHandler}
-                />    
-
-            </ProfileWrapper>
-        );
+    if(isFetching) { 
+        return <Spinner />;
     }
+    return (
+        <ProfileWrapper>
+            <ProfileForm 
+                initialValues={user} 
+                onSubmit={updateCurrentUserInfoHandler}
+                onUpdateAvatarCurrentUser={updateAvatarCurrentUserHandler}
+                onUpdatePasswordCurrentUser={togglePasswordModalHandler}
+            />
+            <ChangePasswordModal 
+                isOpen={isOpenPasswordModal}
+                onToggle={togglePasswordModalHandler}
+                onSubmit={updatePasswordCurrentUserHandler}
+            />    
+
+        </ProfileWrapper>
+    );
 }
 
 const mapStateToProps = (state) => {
@@ -69,7 +59,6 @@ const mapStateToProps = (state) => {
     return {
         user,
         isFetching,
-        valuesFromChangePasswordForm: getFormValues('ChangePasswordForm')(state)
     };
 };
 

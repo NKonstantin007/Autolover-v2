@@ -3,8 +3,7 @@ import {Container, Row, Col} from 'reactstrap'
 import {reduxForm, Field, formValueSelector} from 'redux-form';
 import {connect} from 'react-redux';
 
-
-import ProfileField from './ProfileField';
+import ProfileField from '../components/ProfileField';
 import Button from '../../../styles/components/Button';
 import FlexBlock from '../../../styles/components/FlexBlock';
 import {DownloadIcon} from '../../../styles/icons';
@@ -44,6 +43,7 @@ let ProfileForm = (props) => {
         onUpdatePasswordCurrentUser,
         avatar
     } = props;
+
     return (
         <form onSubmit={handleSubmit}>
             <Container>

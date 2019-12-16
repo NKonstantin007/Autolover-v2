@@ -1,10 +1,11 @@
 import React from 'react';
 import {Field, reduxForm} from 'redux-form';
-import {Modal, ModalHeader, ModalBody, ModalFooter} from 'reactstrap';
+import {Modal, ModalHeader, ModalBody} from 'reactstrap';
 
 import Input from '../../../components/formElements/Input'
 import Label from '../../../components/formElements/styles/Label';
 import Button from '../../../styles/components/Button';
+import {ButtonsWrapper} from './styles/ChangePasswordModal';
 
 const validate = (values) => {
     const charactersPattern = /[^0-9a-z_-]/i;   // RegExp to validate the input of valid characters
@@ -62,25 +63,13 @@ const validate = (values) => {
 }
 
 const ChangePasswordModal = (props) => {
-
-    const {
-        onSubmit,
-        isOpen,
-        onToggle,
-        valid
-    } = props;
-
-    const onSubmitHandler = () => {
-        if(valid) {
-            onSubmit();
-        }
-    }
+    const {handleSubmit, isOpen, onToggle} = props;
 
     return (
         <Modal isOpen={isOpen} toggle={onToggle}>
             <ModalHeader toggle={onToggle}>Изменение пароля</ModalHeader>
             <ModalBody>
-                <form>
+                <form onSubmit={handleSubmit}>
                     <div>
                         <Label>Старый пароль</Label>
                         <Field name="oldPassword" type="password" component={Input} fontSize="small" />
@@ -94,12 +83,13 @@ const ChangePasswordModal = (props) => {
                         <Label>Новый пароль еще раз</Label>
                         <Field name="secondNewPassword" type="password" component={Input} fontSize="small" />
                     </div>
+
+                    <ButtonsWrapper>
+                        <Button type="button" color="danger" round onClick={onToggle}>Отмена</Button>
+                        <Button type="submit" color="primary" round>Изменить</Button>
+                    </ButtonsWrapper>
                 </form>
             </ModalBody>
-            <ModalFooter>
-                <Button type="submit" color="primary" round onClick={onSubmitHandler}>Изменить</Button>
-                <Button type="button" color="danger" round onClick={onToggle}>Отмена</Button>
-            </ModalFooter>
         </Modal>
     );
 }
