@@ -2,11 +2,13 @@ import {Request, Response, NextFunction} from 'express';
 
 import BaseController from './BaseController';
 import AuthService from '../services/AuthService';
+import EmailService from '../services/EmailService';
 import SyncValidate from '../middlewares/SyncValidate';
 import AttachCurrentUser from '../middlewares/AttachCurrentUser';
 import isAuth from '../middlewares/isAuth';
 import { SignUpValidators, SignInValidators } from '../validations/AuthValidators';
 import getTokenFromHeader from '../utils/getTokenFromHeader';
+import IVerifyUser from '../interfaces/IVerifyUser';
 
 class AuthController extends BaseController {
 
@@ -14,7 +16,7 @@ class AuthController extends BaseController {
         this.router.post(
             '/signup',
             SyncValidate(SignUpValidators),
-            this.signUp
+            this.signUp2
         );
         this.router.post(
             '/signin', 
@@ -43,6 +45,18 @@ class AuthController extends BaseController {
         try{
             const user = await AuthService.signUp(req.body);
             return res.status(201).json({...user, msg: 'Success'});
+        }
+        catch(err) {
+            console.log(err);
+            return next(err);
+        }
+    }
+
+    private async signUp2(req: Request, res: Response, next: NextFunction): Promise<Response | void> {
+        try{
+            const user: IVerifyUser = await AuthService.signUp2(req.body);
+            await EmailService.varifyEmailAddress(user);
+            return res.status(200).json({msg: 'Success'});
         }
         catch(err) {
             console.log(err);

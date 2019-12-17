@@ -18,6 +18,15 @@ export class User extends Typegoose {
     @prop({default: ''})
     public aboutMe: string;
 
+    @prop({required: true, default: false})
+    public isVerify: boolean;
+
+    @prop()
+    public verifyToken: string;
+
+    @prop()
+    public verifyExp: number;
+
     @prop({ ref: File, default: null })
     public avatar: Ref<File>;
 }
